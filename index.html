@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hyper Strike Pro - Aesthetic Premium Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght=700;900&family=Rajdhani:wght=500;700&display=swap');
+
+        :root {
+            --primary-color: #FF4757;
+            --secondary-color: #00D2D3;
+            --bg-dark: #06090e;
+            --accent: #FFD32A;
+            --glass: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.12);
+        }
+
+        body, html {
+            margin: 0; padding: 0; background-color: var(--bg-dark);
+            width: 100%; height: 100%; display: flex; flex-direction: column;
+            font-family: 'Rajdhani', sans-serif; color: #fff;
+            touch-action: none; overflow: hidden; user-select: none;
+        }
+
+        .screen {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 100; background: radial-gradient(circle at center, #0f141c, #05070b);
+        }
+        .hidden { display: none !important; }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif; font-size: 46px; text-align: center; margin-bottom: 30px;
+            text-transform: uppercase; letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff 30%, #a4b0be); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+        h1 span { background: linear-gradient(135deg, var(--primary-color), #ff6b81); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .menu-btn {
+            background: var(--glass); border: 1px solid var(--border); color: white;
+            padding: 16px 32px; font-size: 15px; font-family: 'Orbitron', sans-serif; font-weight: 700;
+            border-radius: 12px; margin: 10px; cursor: pointer; width: 290px; text-align: center;
+            backdrop-filter: blur(10px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            letter-spacing: 1px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        .menu-btn:hover { 
+            background: rgba(255,255,255,0.15); 
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 15px rgba(0, 210, 211, 0.4);
+            transform: translateY(-2px);
+        }
+        .btn-orange { 
+            background: linear-gradient(135deg, #ff4757, #ff6b81); border: none; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .btn-orange:hover {
+            background: linear-gradient(135deg, #ff6b81, #ff4757);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+        }
+        
+        .settings-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+            width: 90%; max-width: 650px; max-height: 60vh; overflow-y: auto;
+            background: rgba(5, 8, 14, 0.85); padding: 25px; border-radius: 16px; 
+            border: 1px solid var(--border); backdrop-filter: blur(10px);
+        }
+        .setting-item { display: flex; flex-direction: column; font-size: 14px; color: #cbd5e1; }
+        .setting-item label { font-weight: bold; margin-bottom: 6px; color: var(--accent); font-family: 'Orbitron', sans-serif; font-size: 12px; }
+        .setting-item input, .setting-item select {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: white; 
+            padding: 10px; border-radius: 8px; font-weight: bold; font-family: 'Rajdhani', sans-serif; font-size: 15px;
+        }
+        .setting-item input[type="range"] { accent-color: var(--secondary-color); }
+
+        .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 90%; max-width: 550px; }
+        .field-option {
+            background: rgba(255,255,255,0.03); border: 2px solid var(--border); padding: 22px; border-radius: 14px; cursor: pointer;
+            font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 13px; text-align: center; transition: all 0.3s;
+            color: #a4b0be;
+        }
+        .field-option.selected { 
+            border-color: var(--secondary-color); 
+            color: #fff;
+            background: rgba(0,210,211,0.1); 
+            box-shadow: 0 0 20px rgba(0,210,211,0.25); 
+        }
+
+        /* --- SAHA BOYUTU BURADA DEĞİŞTİ --- */
+        #game-container { 
+            display: none; flex-direction: column; 
+            width: 90%; height: 90%; max-width: 800px; max-height: 1200px; margin: auto; 
+            position: relative; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+        }
+
+        #ui {
+            width: 100%; display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 30px; box-sizing: border-box; background: rgba(6, 9, 14, 0.9);
+            font-size: 20px; font-family: 'Orbitron', sans-serif; font-weight: 900; z-index: 10; border-bottom: 1px solid var(--border);
+        }
+        .score-box { background: rgba(255,255,255,0.06); padding: 4px 16px; border-radius: 6px; color: #fff; border: 1px solid var(--border); }
+        #timer-box { color: var(--accent); font-size: 18px; background: rgba(0,0,0,0.4); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255,211,42,0.2); }
+        
+        #canvas-wrapper { flex: 1; position: relative; width: 100%; height: 100%; background: #000; }
+        canvas { width: 100%; height: 100%; display: block; }
+        
+        .popup-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            font-family: 'Orbitron', sans-serif; font-size: 65px; font-weight: 900; text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            pointer-events: none; opacity: 0; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 20;
+        }
+        .popup-text.show { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    </style>
+</head>
+<body>
+
+<div id="main-menu" class="screen">
+    <h1>HYPER<br><span>STRIKE OMEGA</span></h1>
+    <button class="menu-btn btn-orange" onclick="startGame('1v1')">1 VS 1 ARENA</button>
+    <button class="menu-btn" onclick="startGame('bot')">BOT MÜCADELESİ</button>
+    <button class="menu-btn" onclick="showScreen('field-menu')">SAHA VE ATMOSFER SEÇİMİ</button>
+    <button class="menu-btn" onclick="showScreen('settings-menu')">OMEGA AYARLARI</button>
+</div>
+
+<div id="field-menu" class="screen hidden">
+    <h1>SAHA GÖRSELİ</h1>
+    <div class="field-grid">
+        <div class="field-option selected" id="f-grass" onclick="selectField('grass')">KLASİK ÇİM STADYUMU</div>
+        <div class="field-option" id="f-tokyo" onclick="selectField('tokyo')">NEON TOKYO GRID</div>
+        <div class="field-option" id="f-cyber" onclick="selectField('cyber')">CYBER MATRİS ODASI</div>
+        <div class="field-option" id="f-ice" onclick="selectField('ice')">BUZ KRİSTALİ ARENASI</div>
+    </div>
+    <button class="menu-btn btn-orange" style="margin-top: 30px;" onclick="showScreen('main-menu')">KAYDET VE DÖN</button>
+</div>
+
+<div id="settings-menu" class="screen hidden">
+    <h1>GELİŞMİŞ AYARLAR</h1>
+    <div class="settings-grid">
+        <div class="setting-item"><label>Oyuncu Disk Boyutu (Zorluk)</label><input type="range" id="cfg-strikerrad" min="12" max="38" value="20"></div>
+        <div class="setting-item"><label>Kazanma Skoru</label><input type="number" id="cfg-winscore" value="5" min="1"></div>
+        <div class="setting-item"><label>Maç Süresi Sınırı</label><select id="cfg-timelimit"><option value="60">60 Saniye</option><option value="120">120 Saniye</option><option value="9999" selected>Sınırsız</option></select></div>
+        <div class="setting-item"><label>Saha Yerçekimi</label><select id="cfg-gravity"><option value="0" selected>Yok (Uzay)</option><option value="0.15">Aşağı Çekim</option><option value="-0.15">Yukarı Çekim</option></select></div>
+        <div class="setting-item"><label>Dinamik Rüzgar</label><select id="cfg-wind"><option value="0" selected>Kapalı</option><option value="0.05">Hafif Esinti</option><option value="0.15">Fırtına</option></select></div>
+        <div class="setting-item"><label>Top Çapı Ölçüsü</label><input type="range" id="cfg-ballradius" min="10" max="25" value="14"></div>
+        <div class="setting-item"><label>Disk Esnekliği</label><input type="range" id="cfg-elasticity" min="8" max="14" value="10"></div>
+        <div class="setting-item"><label>Kuantum Portalları</label><select id="cfg-portals"><option value="true" selected>Aktif</option><option value="false">Kapalı</option></select></div>
+        <div class="setting-item"><label>Karadelik Girdabı</label><select id="cfg-blackhole"><option value="true">Açık</option><option value="false" selected>Kapalı</option></select></div>
+        <div class="setting-item"><label>Disk Stamina (Enerji)</label><select id="cfg-stamina"><option value="true" selected>Açık</option><option value="false">Kapalı</option></select></div>
+        <div class="setting-item"><label>Bot Yapay Zeka Tarzı</label><select id="cfg-botstyle"><option value="balanced" selected>Dengeli</option><option value="rush">Agresif Hücum</option><option value="wall">Duvar Ustası</option></select></div>
+        <div class="setting-item"><label>Top Hız Sınırı</label><input type="range" id="cfg-speed" min="15" max="40" value="26"></div>
+        <div class="setting-item"><label>Ekran Sarsıntısı</label><select id="cfg-shake"><option value="true">Açık</option><option value="false">Kapalı</option></select></div>
+        <div class="setting-item"><label>Kritik Yavaş Çekim</label><select id="cfg-slowmo"><option value="true" selected>Açık</option><option value="false">Kapalı</option></select></div>
+        <div class="setting-item"><label>Hareketli Engeller</label><select id="cfg-obstacles"><option value="true" selected>Açık</option><option value="false">Kapalı</option></select></div>
+    </div>
+    <button class="menu-btn btn-orange" onclick="applySettings()">UYGULA VE DÖN</button>
+</div>
+
+<div id="game-over-screen" class="screen hidden">
+    <h1 id="winner-text">MÜKEMMEL GALİBİYET!</h1>
+    <button class="menu-btn btn-orange" onclick="showScreen('main-menu')">ANA MENÜYE DÖN</button>
+</div>
+
+<div id="game-container">
+    <div id="ui">
+        <div style="color: var(--secondary-color);">MAVİ <span class="score-box" id="score2">0</span></div>
+        <div id="timer-box">00:00</div>
+        <div style="color: var(--primary-color);"><span class="score-box" id="score1">0</span> TURUNCU</div>
+    </div>
+    <div id="canvas-wrapper">
+        <canvas id="gameCanvas"></canvas>
+        <div id="popup" class="popup-text" style="color:#fff;">GOL!</div>
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let audioCtx = null;
+    function initAudio() { if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    function playTone(freq, type, duration, vol=0.1) {
+        if (!audioCtx) return;
+        let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+        osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + duration);
+    }
+
+    let cfg = { 
+        winScore: 5, timeLimit: 9999, gravity: 0, wind: 0, ballRadius: 14, elasticity: 1,
+        usePortals: true, useBlackhole: false, useStamina: true, botStyle: 'balanced',
+        maxSpeed: 26, strikerRad: 20, shake: true, useSlowMo: true, useObstacles: true
+    };
+
+    let score1 = 0, score2 = 0, currentPlayer = 1, currentMode = '1v1', gameState = 'waiting', gameLoopId;
+    let frameCount = 0, matchTimer = 0, matchSeconds = 0, timeScale = 1;
+    let currentTheme = 'grass';
+    let particles = [], trails = [], shakeTime = 0, wallCombo = 0;
+    
+    let balls = [];
+    let strikers = [];
+    let goalPosts = [];
+    let obstacles = [];
+    let portals = [];
+    let blackHoles = [];
+    let powerUps = [];
+
+    let goalWidth, goalX;
+    let selectedStriker = null, dragStart = { x: 0, y: 0 }, dragCurrent = { x: 0, y: 0 };
+    let windVector = { vx: 0, vy: 0, nextChange: 0 };
+
+    function resizeCanvas() {
+        const wrapper = document.getElementById('canvas-wrapper');
+        canvas.width = wrapper.clientWidth;
+        canvas.height = wrapper.clientHeight;
+        setupEnvironment();
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    function setupEnvironment() {
+        goalWidth = canvas.width * 0.35;
+        if(goalWidth > 260) goalWidth = 260;
+        goalX = (canvas.width - goalWidth) / 2;
+
+        goalPosts = [
+            {x: goalX, y: 0, r: 10, m: Infinity, isStatic: true, color: '#fff'}, {x: goalX + goalWidth, y: 0, r: 10, m: Infinity, isStatic: true, color: '#fff'},
+            {x: goalX, y: canvas.height, r: 10, m: Infinity, isStatic: true, color: '#fff'}, {x: goalX + goalWidth, y: canvas.height, r: 10, m: Infinity, isStatic: true, color: '#fff'}
+        ];
+
+        if(cfg.usePortals) {
+            portals = [
+                {x: canvas.width * 0.15, y: canvas.height * 0.5, r: 22, targetIdx: 1, color: '#ff9f43'},
+                {x: canvas.width * 0.85, y: canvas.height * 0.5, r: 22, targetIdx: 0, color: '#a55eea'}
+            ];
+        } else { portals = []; }
+
+        if(cfg.useBlackhole) {
+            blackHoles = [
+                {x: canvas.width * 0.5, y: canvas.height * 0.33, pull: 0.3, r: 28},
+                {x: canvas.width * 0.5, y: canvas.height * 0.67, pull: 0.3, r: 28}
+            ];
+        } else { blackHoles = []; }
+
+        if(cfg.useObstacles) {
+            obstacles = [
+                { x: canvas.width * 0.25, y: canvas.height * 0.25, r: 16, m: Infinity, color: '#ffd32a', isStatic: true, dir: 1, hp: 3 },
+                { x: canvas.width * 0.75, y: canvas.height * 0.25, r: 16, m: Infinity, color: '#ffd32a', isStatic: true, dir: -1, hp: 3 },
+                { x: canvas.width * 0.25, y: canvas.height * 0.75, r: 16, m: Infinity, color: '#ffd32a', isStatic: true, dir: 1, hp: 3 },
+                { x: canvas.width * 0.75, y: canvas.height * 0.75, r: 16, m: Infinity, color: '#ffd32a', isStatic: true, dir: -1, hp: 3 }
+            ];
+        } else { obstacles = []; }
+    }
+
+    class Spark {
+        constructor(x, y, color, speedScale=1) {
+            this.x = x; this.y = y; this.color = color;
+            let angle = Math.random() * Math.PI * 2; let speed = (Math.random() * 6 + 2) * speedScale;
+            this.vx = Math.cos(angle) * speed; this.vy = Math.sin(angle) * speed;
+            this.alpha = 1; this.life = Math.random() * 0.05 + 0.02;
+        }
+        update() { this.x += this.vx * timeScale; this.y += this.vy * timeScale; this.alpha -= this.life * timeScale; }
+        draw() {
+            ctx.save(); ctx.globalAlpha = Math.max(0, this.alpha); ctx.fillStyle = this.color;
+            ctx.shadowBlur = 8; ctx.shadowColor = this.color;
+            ctx.beginPath(); ctx.arc(this.x, this.y, Math.random() * 3.5 + 1, 0, Math.PI*2); ctx.fill(); ctx.restore();
+        }
+    }
+
+    function createSparks(x, y, color, scale=1) {
+        for(let i=0; i<16; i++) particles.push(new Spark(x, y, color, scale));
+    }
+
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+        document.getElementById('game-container').style.display = 'none';
+        if (screenId === 'game') {
+            document.getElementById('game-container').style.display = 'flex';
+            resizeCanvas();
+        } else { document.getElementById(screenId).classList.remove('hidden'); }
+    }
+
+    function selectField(id) {
+        currentTheme = id;
+        document.querySelectorAll('.field-option').forEach(el => el.classList.remove('selected'));
+        document.getElementById('f-'+id).classList.add('selected');
+    }
+
+    function applySettings() {
+        cfg.strikerRad = parseInt(document.getElementById('cfg-strikerrad').value);
+        cfg.winScore = parseInt(document.getElementById('cfg-winscore').value);
+        cfg.timeLimit = parseInt(document.getElementById('cfg-timelimit').value);
+        cfg.gravity = parseFloat(document.getElementById('cfg-gravity').value);
+        cfg.wind = parseFloat(document.getElementById('cfg-wind').value);
+        cfg.ballRadius = parseInt(document.getElementById('cfg-ballradius').value);
+        cfg.elasticity = parseInt(document.getElementById('cfg-elasticity').value) / 10;
+        cfg.usePortals = document.getElementById('cfg-portals').value === 'true';
+        cfg.useBlackhole = document.getElementById('cfg-blackhole').value === 'true';
+        cfg.useStamina = document.getElementById('cfg-stamina').value === 'true';
+        cfg.botStyle = document.getElementById('cfg-botstyle').value;
+        cfg.maxSpeed = parseInt(document.getElementById('cfg-speed').value);
+        cfg.shake = document.getElementById('cfg-shake').value === 'true';
+        cfg.useSlowMo = document.getElementById('cfg-slowmo').value === 'true';
+        cfg.useObstacles = document.getElementById('cfg-obstacles').value === 'true';
+        showScreen('main-menu');
+    }
+
+    function startGame(mode) {
+        initAudio(); currentMode = mode; score1 = 0; score2 = 0; currentPlayer = 1;
+        matchSeconds = 0; matchTimer = 0; wallCombo = 0; timeScale = 1;
+        balls = []; powerUps = [];
+        strikers = [
+            { id: 1, x: 0, y: 0, r: cfg.strikerRad, vx: 0, vy: 0, m: 10, color: '#ff4757', stamina: 100 },
+            { id: 2, x: 0, y: 0, r: cfg.strikerRad, vx: 0, vy: 0, m: 10, color: '#00D2D3', stamina: 100 }
+        ];
+        showScreen('game');
+        resetPositions();
+        if (gameLoopId) cancelAnimationFrame(gameLoopId);
+        gameLoop();
+    }
+
+    function triggerShake() { if(cfg.shake) shakeTime = 12; }
+
+    function spawnPowerUp() {
+        if(powerUps.length >= 2) return;
+        const types = ['multiball', 'magnet', 'shrink', 'shield'];
+        powerUps.push({
+            x: Math.random() * (canvas.width - 100) + 50,
+            y: Math.random() * (canvas.height - 300) + 150,
+            r: 15,
+            type: types[Math.floor(Math.random() * types.length)]
+        });
+    }
+
+    function botTurn() {
+        if (currentMode !== 'bot' || currentPlayer !== 2 || gameState !== 'waiting') return;
+        
+        let targetBall = balls[0];
+        if(!targetBall) return;
+
+        let botS = strikers[1];
+        let reactionDelay = cfg.botStyle === 'rush' ? 240 : (cfg.botStyle === 'wall' ? 480 : 360);
+
+        setTimeout(() => {
+            if (gameState !== 'waiting') return;
+            let targetX = targetBall.x; let targetY = targetBall.y;
+            if (cfg.botStyle === 'wall') targetX += (Math.random() - 0.5) * 70;
+
+            let dx = targetX - botS.x; let dy = targetY - botS.y;
+            
+            dragStart = { x: botS.x, y: botS.y };
+            dragCurrent = { x: botS.x - dx * 0.65, y: botS.y - dy * 0.65 };
+            selectedStriker = botS; gameState = 'dragging';
+            
+            setTimeout(() => {
+                if(gameState === 'dragging') endInteraction({preventDefault:()=>{}});
+            }, 160);
+        }, reactionDelay);
+    }
+
+    function update() {
+        frameCount++;
+        
+        if(gameState !== 'gameover') {
+            matchTimer++;
+            if(matchTimer >= 60) {
+                matchTimer = 0; matchSeconds++;
+                let displaySec = matchSeconds % 60; let displayMin = Math.floor(matchSeconds / 60);
+                document.getElementById('timer-box').innerText = 
+                    (displayMin < 10 ? "0"+displayMin : displayMin) + ":" + (displaySec < 10 ? "0"+displaySec : displaySec);
+                
+                if(matchSeconds >= cfg.timeLimit) handleTimeOut();
+            }
+        }
+
+        if(cfg.wind > 0 && frameCount > windVector.nextChange) {
+            let angle = Math.random() * Math.PI * 2;
+            windVector.vx = Math.cos(angle) * cfg.wind;
+            windVector.vy = Math.sin(angle) * cfg.wind;
+            windVector.nextChange = frameCount + 200 + Math.random() * 150;
+        }
+
+        obstacles.forEach(obs => {
+            obs.x += obs.dir * 1.5 * timeScale;
+            if(obs.x - obs.r < 25 || obs.x + obs.r > canvas.width - 25) obs.dir *= -1;
+        });
+
+        if(Math.random() < 0.004) spawnPowerUp();
+
+        let nearGoal = false;
+        if(cfg.useSlowMo) {
+            balls.forEach(b => {
+                if((b.y < 70 && b.x > goalX && b.x < goalX+goalWidth) || (b.y > canvas.height - 70 && b.x > goalX && b.x < goalX+goalWidth)) {
+                    nearGoal = true;
+                }
+            });
+            timeScale = nearGoal ? 0.35 : 1.0;
+        }
+
+        if (gameState === 'moving') {
+            let isMoving = false;
+            const substeps = 4;
+            let entities = [...balls, ...strikers, ...goalPosts, ...obstacles];
+
+            for (let step = 0; step < substeps; step++) {
+                balls.forEach((ball) => {
+                    let speed = Math.hypot(ball.vx, ball.vy);
+
+                    if (step === 0 && speed > 2.5) {
+                        trails.push({x: ball.x, y: ball.y, r: ball.r, alpha: 0.45, color: ball.color});
+                        if (trails.length > 25) trails.shift();
+                    }
+
+                    ball.vy += cfg.gravity / substeps;
+                    ball.vx += windVector.vx / substeps;
+                    ball.vy += windVector.vy / substeps;
+
+                    blackHoles.forEach(bh => {
+                        let distBH = Math.hypot(bh.x - ball.x, bh.y - ball.y);
+                        if(distBH < 220 && distBH > 5) {
+                            let force = (1 - distBH / 220) * bh.pull;
+                            ball.vx += ((bh.x - ball.x) / distBH) * force / substeps;
+                            ball.vy += ((bh.y - ball.y) / distBH) * force / substeps;
+                        }
+                    });
+
+                    ball.x += ball.vx * timeScale / substeps;
+                    ball.y += ball.vy * timeScale / substeps;
+
+                    if (speed > cfg.maxSpeed) { ball.vx = (ball.vx/speed)*cfg.maxSpeed; ball.vy = (ball.vy/speed)*cfg.maxSpeed; }
+                    ball.vx *= Math.pow(0.988, timeScale/substeps); ball.vy *= Math.pow(0.988, timeScale/substeps);
+
+                    if (Math.abs(ball.vx) > 0.15 || Math.abs(ball.vy) > 0.15) isMoving = true;
+
+                    if (ball.x - ball.r < 0) { ball.x = ball.r; ball.vx *= -1; wallCombo++; createSparks(0, ball.y, '#fff'); playTone(360, 'sine', 0.05); }
+                    if (ball.x + ball.r > canvas.width) { ball.x = canvas.width - ball.r; ball.vx *= -1; wallCombo++; createSparks(canvas.width, ball.y, '#fff'); playTone(360, 'sine', 0.05); }
+
+                    if (ball.y - ball.r < 0) {
+                        if (ball.x > goalX && ball.x < goalX + goalWidth) { handleGoal(1); return; }
+                        else { ball.y = ball.r; ball.vy *= -1; wallCombo++; createSparks(ball.x, 0, '#fff'); playTone(360, 'sine', 0.05); }
+                    }
+                    if (ball.y + ball.r > canvas.height) {
+                        if (ball.x > goalX && ball.x < goalX + goalWidth) { handleGoal(2); return; }
+                        else { ball.y = canvas.height - ball.r; ball.vy *= -1; wallCombo++; createSparks(ball.x, canvas.height, '#fff'); playTone(360, 'sine', 0.05); }
+                    }
+
+                    portals.forEach(p => {
+                        if(Math.hypot(ball.x - p.x, ball.y - p.y) < ball.r + p.r - 4) {
+                            let targetPortal = portals[p.targetIdx];
+                            ball.x = targetPortal.x + (ball.vx > 0 ? 25 : -25);
+                            ball.y = targetPortal.y + (ball.vy > 0 ? 25 : -25);
+                            playTone(700, 'triangle', 0.22, 0.12);
+                            createSparks(p.x, p.y, p.color, 1.4);
+                            createSparks(targetPortal.x, targetPortal.y, targetPortal.color, 1.4);
+                        }
+                    });
+
+                    powerUps.forEach((pu, puIdx) => {
+                        if (Math.hypot(ball.x - pu.x, ball.y - pu.y) < ball.r + pu.r) {
+                            activatePowerUp(pu.type); powerUps.splice(puIdx, 1);
+                        }
+                    });
+                });
+
+                strikers.forEach(s => {
+                    s.x += s.vx * timeScale / substeps; s.y += s.vy * timeScale / substeps;
+                    s.vx *= Math.pow(0.88, timeScale/substeps); s.vy *= Math.pow(0.88, timeScale/substeps);
+                    if (Math.abs(s.vx) > 0.1 || Math.abs(s.vy) > 0.1) isMoving = true;
+
+                    if (s.x - s.r < 0) { s.x = s.r; s.vx *= -0.5; }
+                    if (s.x + s.r > canvas.width) { s.x = canvas.width - s.r; s.vx *= -0.5; }
+                    if (s.y - s.r < 0) { s.y = s.r; s.vy *= -0.5; }
+                    if (s.y + s.r > canvas.height) { s.y = canvas.height - s.r; s.vy *= -0.5; }
+
+                    if(cfg.useStamina && s.stamina < 100) s.stamina += 0.08;
+                });
+
+                for (let i=0; i<entities.length; i++) {
+                    for (let j=i+1; j<entities.length; j++) resolveCollision(entities[i], entities[j]);
+                }
+            }
+
+            if (!isMoving) {
+                gameState = 'waiting'; currentPlayer = currentPlayer === 1 ? 2 : 1;
+                wallCombo = 0; updateUI(); if (currentMode === 'bot' && currentPlayer === 2) botTurn();
+            }
+        }
+        
+        particles.forEach((p, index) => { p.update(); if(p.alpha <= 0) particles.splice(index, 1); });
+        trails.forEach(t => t.alpha -= 0.018 * timeScale);
+        trails = trails.filter(t => t.alpha > 0);
+    }
+
+    function activatePowerUp(type) {
+        playTone(550, 'square', 0.22, 0.18); triggerShake();
+        let currentStriker = strikers[currentPlayer - 1];
+
+        if(type === 'multiball') {
+            balls.push({ x: canvas.width/2, y: canvas.height/2 - 30, r: cfg.ballRadius, vx: (Math.random()-0.5)*14, vy: (Math.random()-0.5)*14, m: 0.6, color: '#2ecc71' });
+        } else if(type === 'shrink') {
+            currentStriker.r = cfg.strikerRad * 0.65;
+            setTimeout(() => currentStriker.r = cfg.strikerRad, 8000);
+        } else if(type === 'magnet') {
+            let targetBall = balls[0];
+            if(targetBall) {
+                targetBall.vx += (currentStriker.x - targetBall.x) * 0.28;
+                targetBall.vy += (currentStriker.y - targetBall.y) * 0.28;
+            }
+        } else if(type === 'shield') {
+            let shieldY = currentPlayer === 1 ? canvas.height - 25 : 25;
+            obstacles.push({ x: canvas.width/2, y: shieldY, r: goalWidth/2, m: Infinity, color: '#00ffea', isStatic: true, dir: 0, hp: 999, isShield: true });
+            setTimeout(() => { obstacles = obstacles.filter(o => !o.isShield); }, 6000);
+        }
+    }
+
+    function resolveCollision(c1, c2) {
+        if (!c1 || !c2) return;
+        let dx = c2.x - c1.x; let dy = c2.y - c1.y;
+        let distSq = dx*dx + dy*dy; let minDist = c1.r + c2.r;
+
+        if (distSq < minDist*minDist && distSq > 0) {
+            let dist = Math.sqrt(distSq); let nx = dx / dist; let ny = dy / dist;
+            let overlap = minDist - dist;
+
+            let invM1 = c1.isStatic ? 0 : 1 / c1.m; let invM2 = c2.isStatic ? 0 : 1 / c2.m;
+            let sumInvM = invM1 + invM2; if (sumInvM === 0) return;
+
+            let correction = overlap / sumInvM;
+            if (!c1.isStatic) { c1.x -= nx * correction * invM1; c1.y -= ny * correction * invM1; }
+            if (!c2.isStatic) { c2.x += nx * correction * invM2; c2.y += ny * correction * invM2; }
+
+            let kx = (c2.vx || 0) - (c1.vx || 0); let ky = (c2.vy || 0) - (c1.vy || 0);
+            let velAlongNormal = kx * nx + ky * ny;
+            if (velAlongNormal > 0) return;
+
+            let restitution = cfg.elasticity;
+            let j = -(1 + restitution) * velAlongNormal; j /= sumInvM;
+            let impulseX = j * nx; let impulseY = j * ny;
+
+            if (!c1.isStatic) { c1.vx -= impulseX * invM1; c1.vy -= impulseY * invM1; }
+            if (!c2.isStatic) { c2.vx += impulseX * invM2; c2.vy += impulseY * invM2; }
+            
+            if (balls.includes(c1) || balls.includes(c2)) {
+                let hitBall = balls.includes(c1) ? c1 : c2;
+                createSparks(hitBall.x, hitBall.y, '#ffd32a', 0.8);
+                playTone(280, 'triangle', 0.1, 0.15); triggerShake();
+
+                if(obstacles.includes(c1) && !c1.isShield) { c1.hp--; if(c1.hp<=0) obstacles = obstacles.filter(o=>o!==c1); }
+                if(obstacles.includes(c2) && !c2.isShield) { c2.hp--; if(c2.hp<=0) obstacles = obstacles.filter(o=>o!==c2); }
+            }
+        }
+    }
+
+    function draw() {
+        ctx.save();
+        if (shakeTime > 0) { ctx.translate((Math.random() - 0.5) * 8, (Math.random() - 0.5) * 8); shakeTime--; }
+
+        // --- SAHA GÖRSEL ATMOSFER TASARIMLARI ---
+        if (currentTheme === 'grass') {
+            let grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 40, canvas.width/2, canvas.height/2, canvas.height);
+            grad.addColorStop(0, '#1abc9c'); grad.addColorStop(1, '#0e6251');
+            ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = 'rgba(255,255,255,0.04)';
+            for(let i=0; i<canvas.height; i+=80) { if((i/80)%2===0) ctx.fillRect(0, i, canvas.width, 40); }
+            
+            ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 3;
+            ctx.strokeRect(20, 20, canvas.width-40, canvas.height-40);
+        } 
+        else if (currentTheme === 'tokyo') {
+            let grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 20, canvas.width/2, canvas.height/2, canvas.width);
+            grad.addColorStop(0, '#1f1338'); grad.addColorStop(1, '#080312');
+            ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = 'rgba(255, 0, 128, 0.25)'; ctx.lineWidth = 1;
+            for(let x=0; x<canvas.width; x+=50) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+            for(let y=0; y<canvas.height; y+=50) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
+            
+            ctx.strokeStyle = '#00ffcc'; ctx.lineWidth = 2;
+            ctx.strokeRect(10, 10, canvas.width-20, canvas.height-20);
+        } 
+        else if (currentTheme === 'cyber') {
+            let grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            grad.addColorStop(0, '#020914'); grad.addColorStop(0.5, '#0b192c'); grad.addColorStop(1, '#040d1a');
+            ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = 'rgba(0, 210, 211, 0.15)'; ctx.lineWidth = 2;
+            ctx.beginPath();
+            for(let i=1; i<4; i++) {
+                ctx.moveTo(canvas.width * (i*0.25), 0); ctx.lineTo(canvas.width * (i*0.25), canvas.height);
+                ctx.moveTo(0, canvas.height * (i*0.25)); ctx.lineTo(canvas.width, canvas.height * (i*0.25));
+            }
+            ctx.stroke();
+
+            ctx.fillStyle = 'rgba(0, 210, 211, 0.3)';
+            ctx.fillRect(30, 30, 40, 4); ctx.fillRect(30, 30, 4, 40);
+            ctx.fillRect(canvas.width-70, canvas.height-34, 40, 4); ctx.fillRect(canvas.width-34, canvas.height-70, 4, 40);
+        } 
+        else if (currentTheme === 'ice') {
+            let grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            grad.addColorStop(0, '#74b9ff'); grad.addColorStop(0.5, '#a29bfe'); grad.addColorStop(1, '#ced6e0');
+            ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = 'rgba(255,255,255,0.4)'; ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, 100); ctx.lineTo(140, 180); ctx.lineTo(80, 300); ctx.lineTo(250, 450);
+            ctx.moveTo(canvas.width, canvas.height-120); ctx.lineTo(canvas.width-150, canvas.height-220); ctx.lineTo(canvas.width-50, canvas.height-380);
+            ctx.stroke();
+        }
+
+        // Ortak Saha Çizgileri
+        ctx.strokeStyle = currentTheme === 'tokyo' ? 'rgba(0, 255, 204, 0.4)' : 'rgba(255,255,255,0.2)';
+        ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(0, canvas.height/2); ctx.lineTo(canvas.width, canvas.height/2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 80, 0, Math.PI * 2); ctx.stroke();
+
+        // Kaleler
+        ctx.fillStyle = 'rgba(255, 71, 87, 0.4)'; ctx.fillRect(goalX, canvas.height - 12, goalWidth, 12);
+        ctx.fillStyle = 'rgba(0, 210, 211, 0.4)'; ctx.fillRect(goalX, 0, goalWidth, 12);
+
+        // Portallar
+        portals.forEach(p => {
+            let gradient = ctx.createRadialGradient(p.x, p.y, 2, p.x, p.y, p.r);
+            gradient.addColorStop(0, '#fff'); gradient.addColorStop(0.4, p.color); gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+        });
+
+        // Karadelikler
+        blackHoles.forEach(bh => {
+            ctx.save(); ctx.shadowBlur = 25; ctx.shadowColor = '#a55eea';
+            ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(bh.x, bh.y, bh.r + Math.sin(frameCount*0.12)*3, 0, Math.PI*2); ctx.fill();
+            ctx.strokeStyle = 'rgba(165, 94, 234, 0.6)'; ctx.lineWidth = 3; ctx.stroke(); ctx.restore();
+        });
+
+        // Güçlendirmeler
+        powerUps.forEach(pu => {
+            ctx.save(); ctx.shadowBlur = 15; ctx.shadowColor = '#ffd32a';
+            ctx.fillStyle = '#ffd32a'; ctx.beginPath(); ctx.arc(pu.x, pu.y, pu.r, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = '#000'; ctx.font = 'bold 13px Orbitron'; ctx.textAlign = 'center'; ctx.fillText(pu.type[0].toUpperCase(), pu.x, pu.y+4);
+            ctx.restore();
+        });
+
+        // Engeller
+        obstacles.forEach(obs => {
+            ctx.save(); ctx.shadowBlur = 12; ctx.shadowColor = obs.color;
+            ctx.fillStyle = obs.color; ctx.beginPath(); ctx.arc(obs.x, obs.y, obs.r, 0, Math.PI*2); ctx.fill();
+            if(!obs.isShield) {
+                ctx.fillStyle = '#000'; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(obs.hp, obs.x, obs.y+4);
+            }
+            ctx.restore();
+        });
+
+        // Kuyruk Efekti
+        trails.forEach(t => {
+            ctx.save(); ctx.globalAlpha = t.alpha; ctx.fillStyle = t.color;
+            ctx.beginPath(); ctx.arc(t.x, t.y, t.r * 0.85, 0, Math.PI*2); ctx.fill(); ctx.restore();
+        });
+
+        particles.forEach(p => p.draw());
+
+        // Top Tasarımı
+        balls.forEach(ball => {
+            ctx.save(); ctx.shadowBlur = 18; ctx.shadowColor = '#fff';
+            ctx.fillStyle = ball.color; ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = 'rgba(255,255,255,0.6)'; ctx.beginPath(); ctx.arc(ball.x - ball.r*0.3, ball.y - ball.r*0.3, ball.r*0.25, 0, Math.PI*2); ctx.fill();
+            ctx.restore();
+        });
+
+        // Oyuncu Yuvarlakları
+        strikers.forEach(obj => {
+            ctx.save();
+            ctx.shadowBlur = 15; ctx.shadowColor = obj.color;
+
+            if (obj.id === currentPlayer && gameState === 'waiting') {
+                ctx.beginPath(); ctx.arc(obj.x, obj.y, obj.r + 7 + Math.sin(frameCount*0.14)*2, 0, Math.PI*2);
+                ctx.strokeStyle = obj.color; ctx.lineWidth = 2; ctx.stroke();
+            }
+
+            if(cfg.useStamina) {
+                ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 2.5;
+                ctx.beginPath(); ctx.arc(obj.x, obj.y, obj.r + 4, 0, Math.PI*2); ctx.stroke();
+                ctx.strokeStyle = '#2ecc71';
+                ctx.beginPath(); ctx.arc(obj.x, obj.y, obj.r + 4, -Math.PI/2, (-Math.PI/2) + (Math.PI*2)*(obj.stamina/100)); ctx.stroke();
+            }
+
+            ctx.fillStyle = obj.color; ctx.beginPath(); ctx.arc(obj.x, obj.y, obj.r, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = 'rgba(0,0,0,0.35)'; ctx.beginPath(); ctx.arc(obj.x, obj.y, obj.r - 5, 0, Math.PI*2); ctx.fill();
+            
+            ctx.restore();
+        });
+
+        // Nişan Ok Çizgisi
+        if (gameState === 'dragging' && selectedStriker) {
+            let dx = dragStart.x - dragCurrent.x; let dy = dragStart.y - dragCurrent.y;
+            let dist = Math.hypot(dx, dy); let maxP = 110; if (dist > maxP) { dx = (dx/dist)*maxP; dy = (dy/dist)*maxP; dist = maxP; }
+            let powerRatio = dist / maxP;
+            
+            ctx.save();
+            ctx.shadowBlur = 10; ctx.shadowColor = selectedStriker.color;
+            ctx.strokeStyle = `rgb(255, ${255 - (powerRatio*255)}, 50)`; ctx.lineWidth = 5 + powerRatio * 3;
+            ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(selectedStriker.x, selectedStriker.y);
+            ctx.lineTo(selectedStriker.x + dx, selectedStriker.y + dy); ctx.stroke();
+            ctx.restore();
+        }
+
+        if(cfg.wind > 0 && Math.abs(windVector.vx) > 0.01) {
+            ctx.strokeStyle = 'rgba(255, 211, 42, 0.4)'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(canvas.width - 45, 45); ctx.lineTo(canvas.width - 45 + windVector.vx*280, 45 + windVector.vy*280); ctx.stroke();
+        }
+
+        ctx.restore();
+    }
+
+    function handleGoal(pId) {
+        if (pId === 1) score1++; else score2++;
+        playTone(200, 'sawtooth', 0.4, 0.25); playTone(400, 'square', 0.25, 0.2); triggerShake();
+        
+        const popup = document.getElementById("popup");
+        if(wallCombo >= 3) { popup.innerText = `KOMBO GOL X${wallCombo}!`; popup.style.color = '#FFD32A'; }
+        else { popup.innerText = "MÜKEMMEL GOL!"; popup.style.color = '#fff'; }
+        
+        popup.classList.add('show');
+        setTimeout(() => popup.classList.remove('show'), 1400);
+        
+        gameState = 'waiting'; updateUI();
+        setTimeout(() => {
+            if (score1 >= cfg.winScore || score2 >= cfg.winScore) {
+                let winner = score1 >= cfg.winScore ? "TURUNCU" : (currentMode==='bot' ? "BOT" : "MAVİ");
+                document.getElementById('winner-text').innerText = winner + " KAZANDI!";
+                gameState = 'gameover'; showScreen('game-over-screen');
+            } else { resetPositions(); }
+        }, 1400);
+    }
+
+    function handleTimeOut() {
+        gameState = 'gameover';
+        let msg = "SÜRE BİTTİ!\n";
+        if(score1 === score2) {
+            msg += "ALTIN GOL MODU!"; cfg.winScore = Math.max(score1, score2) + 1;
+            gameState = 'waiting'; resetPositions(); return;
+        } else { msg += score1 > score2 ? "TURUNCU KAZANDI!" : "MAVİ KAZANDI!"; }
+        document.getElementById('winner-text').innerText = msg;
+        showScreen('game-over-screen');
+    }
+
+    function resetPositions() {
+        balls = [{ x: canvas.width/2, y: canvas.height/2, r: cfg.ballRadius, vx: 0, vy: 0, m: 0.6, color: '#ffffff' }];
+        strikers[0].x = canvas.width/2; strikers[0].y = canvas.height - 110; strikers[0].vx = 0; strikers[0].vy = 0;
+        strikers[1].x = canvas.width/2; strikers[1].y = 110; strikers[1].vx = 0; strikers[1].vy = 0;
+        trails = []; powerUps = []; wallCombo = 0; gameState = 'waiting';
+        if (currentMode === 'bot' && currentPlayer === 2) botTurn();
+    }
+
+    function updateUI() {
+        document.getElementById('score1').innerText = score1; document.getElementById('score2').innerText = score2;
+    }
+
+    function startInteraction(e) {
+        if (gameState !== 'waiting' || (currentMode === 'bot' && currentPlayer === 2)) return;
+        e.preventDefault(); initAudio();
+        let rect = canvas.getBoundingClientRect();
+        let clientX = e.touches ? e.touches[0].clientX : e.clientX; let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        let touchX = (clientX - rect.left) * (canvas.width / rect.width); let touchY = (clientY - rect.top) * (canvas.height / rect.height);
+
+        let activeS = strikers.find(s => s.id === currentPlayer);
+        if (Math.hypot(activeS.x - touchX, activeS.y - touchY) < activeS.r * 2.8) {
+            if(cfg.useStamina && activeS.stamina < 15) return;
+            selectedStriker = activeS; dragStart = { x: touchX, y: touchY }; dragCurrent = { x: touchX, y: touchY }; gameState = 'dragging';
+        }
+    }
+
+    function moveInteraction(e) {
+        if (gameState !== 'dragging' || !selectedStriker) return;
+        e.preventDefault(); let rect = canvas.getBoundingClientRect();
+        let clientX = e.touches ? e.touches[0].clientX : e.clientX; let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        dragCurrent = { x: (clientX - rect.left)*(canvas.width / rect.width), y: (clientY - rect.top)*(canvas.height / rect.height) };
+    }
+
+    function endInteraction(e) {
+        if (gameState !== 'dragging' || !selectedStriker) return;
+        e.preventDefault();
+        let dx = dragStart.x - dragCurrent.x; let dy = dragStart.y - dragCurrent.y;
+        let dist = Math.hypot(dx, dy); let maxP = 110; if (dist > maxP) { dx = (dx/dist)*maxP; dy = (dy/dist)*maxP; }
+        
+        selectedStriker.vx = dx * 0.95; selectedStriker.vy = dy * 0.95;
+        
+        if (Math.hypot(selectedStriker.vx, selectedStriker.vy) > 1) {
+            if(cfg.useStamina) selectedStriker.stamina -= 25; gameState = 'moving';
+        } else { gameState = 'waiting'; }
+        selectedStriker = null;
+    }
+
+    canvas.addEventListener('mousedown', startInteraction); canvas.addEventListener('mousemove', moveInteraction); window.addEventListener('mouseup', endInteraction);
+    canvas.addEventListener('touchstart', startInteraction, {passive: false}); canvas.addEventListener('touchmove', moveInteraction, {passive: false}); window.addEventListener('touchend', endInteraction);
+
+    function gameLoop() {
+        if(gameState !== 'gameover') { update(); draw(); }
+        gameLoopId = requestAnimationFrame(gameLoop);
+    }
+</script>
+</body>
+</html>
