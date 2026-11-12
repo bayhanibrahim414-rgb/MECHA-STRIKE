@@ -5,31 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MECHA STRIKE // RAW EDITION</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;700;900&family=Orbitron:wght@500;700;900&family=Press+Start+2P&family=Cinzel:wght@700;900&family=VT323&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&family=Black+Ops+One&display=swap');
 
+        /* ----------------------------------------------------
+           TEMEL DEĞİŞKENLER (VARSAYILAN RAW EDITION RENKLERİ)
+           ---------------------------------------------------- */
         :root {
             --c-red: #FF1010;
             --c-blue: #1030FF;
             --c-yellow: #FFD600;
             --c-black: #0A0A0A;
             --c-white: #F4F4F0;
+            
             --border-thick: 4px solid var(--c-black);
             --shadow-brutal: 6px 6px 0px var(--c-black);
+            --f-head: 'Bebas Neue', sans-serif;
+            --f-body: 'Space Mono', monospace;
+            --ui-rad: 0px;
+            --bg-pattern: repeating-linear-gradient( 45deg, #111, #111 20px, #1a1a1a 20px, #1a1a1a 40px );
         }
+
+        /* ----------------------------------------------------
+           20 FARKLI RENK PALETİ (COLOR STUDIO)
+           ---------------------------------------------------- */
+        body[data-color="raw"] { --c-red: #FF1010; --c-blue: #1030FF; --c-yellow: #FFD600; --c-black: #0A0A0A; --c-white: #F4F4F0; }
+        body[data-color="hacker"] { --c-red: #00FF41; --c-blue: #008F11; --c-yellow: #00FF41; --c-black: #051005; --c-white: #0D0208; --border-thick: 2px solid var(--c-red); }
+        body[data-color="synthwave"] { --c-red: #FF007F; --c-blue: #00F0FF; --c-yellow: #FFE600; --c-black: #1A0B2E; --c-white: #2D1B4E; }
+        body[data-color="cyberpunk"] { --c-red: #FF003C; --c-blue: #04D9FF; --c-yellow: #F3E600; --c-black: #111111; --c-white: #2B2B2B; }
+        body[data-color="monochrome"] { --c-red: #FFFFFF; --c-blue: #AAAAAA; --c-yellow: #CCCCCC; --c-black: #050505; --c-white: #111111; }
+        body[data-color="vaporwave"] { --c-red: #FF71CE; --c-blue: #01CDFE; --c-yellow: #05FFA1; --c-black: #2C2C54; --c-white: #FFFBB5; }
+        body[data-color="bloodmoon"] { --c-red: #DC143C; --c-blue: #8B0000; --c-yellow: #FF0000; --c-black: #050000; --c-white: #110000; }
+        body[data-color="toxic"] { --c-red: #FF4500; --c-blue: #32CD32; --c-yellow: #ADFF2F; --c-black: #0A0A0A; --c-white: #141414; }
+        body[data-color="oceanic"] { --c-red: #00FFFF; --c-blue: #1E90FF; --c-yellow: #00CED1; --c-black: #000022; --c-white: #E0FFFF; }
+        body[data-color="royal"] { --c-red: #800020; --c-blue: #002366; --c-yellow: #D4AF37; --c-black: #0A0A0A; --c-white: #1A1A1A; }
+        body[data-color="pastel"] { --c-red: #FFB3BA; --c-blue: #BAE1FF; --c-yellow: #FFFFBA; --c-black: #4A4A4A; --c-white: #FFF5F5; }
+        body[data-color="void"] { --c-red: #FF00FF; --c-blue: #00FFFF; --c-yellow: #00FF00; --c-black: #000000; --c-white: #111111; }
+        body[data-color="sunset"] { --c-red: #FF4E50; --c-blue: #F9D423; --c-yellow: #FF8E53; --c-black: #2C0707; --c-white: #4A1515; }
+        body[data-color="forest"] { --c-red: #A8E6CF; --c-blue: #3B82F6; --c-yellow: #DCEDC1; --c-black: #1E293B; --c-white: #0F172A; }
+        body[data-color="ice"] { --c-red: #A0E8AF; --c-blue: #88CCF1; --c-yellow: #C1DFF0; --c-black: #00171F; --c-white: #003459; }
+        body[data-color="rust"] { --c-red: #B33939; --c-blue: #227093; --c-yellow: #CC8E35; --c-black: #211E1E; --c-white: #2C2C2C; }
+        body[data-color="candy"] { --c-red: #FF1493; --c-blue: #00BFFF; --c-yellow: #FFD700; --c-black: #191970; --c-white: #FFC0CB; }
+        body[data-color="midnight"] { --c-red: #8A2BE2; --c-blue: #4169E1; --c-yellow: #9370DB; --c-black: #0B0B1A; --c-white: #1A1A3A; }
+        body[data-color="desert"] { --c-red: #E07A5F; --c-blue: #3D405B; --c-yellow: #F2CC8F; --c-black: #2E282A; --c-white: #F4F1DE; }
+        body[data-color="ghost"] { --c-red: #E2E8F0; --c-blue: #94A3B8; --c-yellow: #CBD5E1; --c-black: #0F172A; --c-white: #1E293B; }
+
+        /* ----------------------------------------------------
+           18 FARKLI TASARIM DESENİ (SHAPE STUDIO)
+           ---------------------------------------------------- */
+        body[data-design="brutal"] { --f-head: 'Bebas Neue'; --f-body: 'Space Mono'; --ui-rad: 0px; --bg-pattern: repeating-linear-gradient( 45deg, var(--c-black), var(--c-black) 20px, var(--c-white) 20px, var(--c-white) 40px ); }
+        body[data-design="glass"] { --f-head: 'Inter'; --f-body: 'Inter'; --ui-rad: 30px; --bg-pattern: radial-gradient(circle at center, var(--c-white), var(--c-black)); }
+        body[data-design="cyber"] { --f-head: 'Orbitron'; --f-body: 'Orbitron'; --ui-rad: 0px; --bg-pattern: linear-gradient(var(--c-black) 2px, transparent 2px), linear-gradient(90deg, var(--c-black) 2px, transparent 2px); }
+        body[data-design="pixel"] { --f-head: 'Press Start 2P'; --f-body: 'Press Start 2P'; --ui-rad: 0px; --bg-pattern: radial-gradient(var(--c-yellow) 2px, transparent 2px); }
+        body[data-design="arcade"] { --f-head: 'Bebas Neue'; --f-body: 'Space Mono'; --ui-rad: 10px; --bg-pattern: repeating-linear-gradient(0deg, var(--c-black), var(--c-black) 10px, var(--c-white) 10px, var(--c-white) 20px); }
+        body[data-design="minimal"] { --f-head: 'Inter'; --f-body: 'Inter'; --ui-rad: 0px; --bg-pattern: none; }
+        body[data-design="tactical"] { --f-head: 'Black Ops One'; --f-body: 'Share Tech Mono'; --ui-rad: 4px; --bg-pattern: repeating-linear-gradient(-45deg, var(--c-black), var(--c-black) 15px, var(--c-white) 15px, var(--c-white) 30px); }
+        body[data-design="luxury"] { --f-head: 'Cinzel'; --f-body: 'Inter'; --ui-rad: 2px; --bg-pattern: radial-gradient(circle, var(--c-white) 0%, var(--c-black) 100%); }
+        body[data-design="chalk"] { --f-head: 'Space Mono'; --f-body: 'Space Mono'; --ui-rad: 10px; --bg-pattern: repeating-radial-gradient(circle at center, var(--c-black), var(--c-black) 5px, var(--c-white) 5px, var(--c-white) 10px); }
+        body[data-design="vaporwave"] { --f-head: 'Orbitron'; --f-body: 'Inter'; --ui-rad: 0px; --bg-pattern: linear-gradient(var(--c-red) 1px, transparent 1px), linear-gradient(90deg, var(--c-blue) 1px, transparent 1px); }
+        body[data-design="blood"] { --f-head: 'Cinzel'; --f-body: 'Space Mono'; --ui-rad: 0px; --bg-pattern: radial-gradient(circle, var(--c-white), var(--c-black)); }
+        body[data-design="toxic"] { --f-head: 'Bebas Neue'; --f-body: 'Space Mono'; --ui-rad: 8px; --bg-pattern: repeating-linear-gradient(45deg, var(--c-black), var(--c-black) 10px, var(--c-white) 10px, var(--c-white) 20px); }
+        body[data-design="ocean"] { --f-head: 'Rajdhani'; --f-body: 'Inter'; --ui-rad: 50px; --bg-pattern: radial-gradient(ellipse at center, var(--c-white), var(--c-black)); }
+        body[data-design="comic"] { --f-head: 'Bebas Neue'; --f-body: 'Space Mono'; --ui-rad: 25px 5px 25px 5px; --bg-pattern: radial-gradient(var(--c-black) 15%, transparent 16%); }
+        body[data-design="terminal"] { --f-head: 'VT323'; --f-body: 'VT323'; --ui-rad: 0px; --bg-pattern: linear-gradient(var(--c-white) 50%, transparent 50%); }
+        body[data-design="industrial"] { --f-head: 'Share Tech Mono'; --f-body: 'Space Mono'; --ui-rad: 2px; --bg-pattern: linear-gradient(135deg, var(--c-white) 25%, transparent 25%), linear-gradient(225deg, var(--c-white) 25%, transparent 25%); }
+        body[data-design="pill"] { --f-head: 'Rajdhani'; --f-body: 'Rajdhani'; --ui-rad: 50px; --bg-pattern: repeating-linear-gradient(135deg, var(--c-black), var(--c-black) 25px, var(--c-white) 25px, var(--c-white) 50px); }
+        body[data-design="void"] { --f-head: 'Orbitron'; --f-body: 'Inter'; --ui-rad: 15px; --bg-pattern: radial-gradient(circle at center, var(--c-black) 0%, var(--c-white) 100%); }
 
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: var(--c-black);
-            font-family: 'Space Mono', monospace; color: var(--c-black);
-            overflow: hidden; user-select: none; touch-action: none;
+            font-family: var(--f-body); color: var(--c-black);
+            overflow: hidden; user-select: none; touch-action: none; transition: 0.3s;
         }
 
-        /* Diagonal warning stripes for background */
         .bg-stripes {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
-            background: repeating-linear-gradient( 45deg, #111, #111 20px, #1a1a1a 20px, #1a1a1a 40px );
+            background: var(--bg-pattern); opacity: 0.2; pointer-events: none; transition: 0.3s;
         }
 
         .screen {
@@ -39,37 +92,37 @@
         }
         .hidden { transform: translateY(-120%); pointer-events: none; }
 
-        /* Brutalist Box Container */
+        /* BRUTALIST BOX CONTAINER (ORİJİNAL GÖRÜNÜM) */
         .brutal-box {
-            background: var(--c-white); border: var(--border-thick);
+            background: var(--c-white); border: var(--border-thick); border-radius: var(--ui-rad);
             box-shadow: 12px 12px 0px var(--c-yellow); padding: 40px 30px;
             display: flex; flex-direction: column; align-items: center;
-            position: relative; max-width: 90%; width: 500px;
+            position: relative; max-width: 90%; width: 560px; max-height: 92vh; transition: 0.3s;
         }
         
         .brutal-box::before {
-            content: 'SYS.V.2.0'; position: absolute; top: -15px; left: 20px;
-            background: var(--c-yellow); border: var(--border-thick);
-            padding: 2px 10px; font-weight: bold; font-size: 14px;
+            content: 'SYS.V.3.0'; position: absolute; top: -15px; left: 20px;
+            background: var(--c-yellow); border: var(--border-thick); border-radius: var(--ui-rad);
+            padding: 2px 10px; font-weight: bold; font-size: 14px; font-family: var(--f-body);
         }
 
         h1 {
-            font-family: 'Bebas Neue', sans-serif; font-size: 65px; margin: 0 0 30px 0;
+            font-family: var(--f-head); font-size: 55px; margin: 0 0 25px 0;
             text-transform: uppercase; line-height: 0.9; text-align: center;
             letter-spacing: 2px; color: var(--c-black);
-            text-shadow: 4px 4px 0px var(--c-red);
+            text-shadow: 4px 4px 0px var(--c-red); transition: 0.3s;
         }
         h1 span {
-            display: block; font-size: 30px; letter-spacing: 5px;
-            background: var(--c-black); color: var(--c-yellow);
+            display: block; font-size: 22px; letter-spacing: 5px;
+            background: var(--c-black); color: var(--c-yellow); border-radius: var(--ui-rad);
             padding: 5px; margin-top: 10px; text-shadow: none;
         }
 
         /* BRUTALIST BUTTONS */
         .btn {
-            background: var(--c-white); border: var(--border-thick); color: var(--c-black);
-            padding: 15px 30px; font-size: 24px; font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 2px; margin: 10px 0; cursor: pointer;
+            background: var(--c-white); border: var(--border-thick); border-radius: var(--ui-rad); color: var(--c-black);
+            padding: 15px 30px; font-size: 22px; font-family: var(--f-head);
+            letter-spacing: 2px; margin: 8px 0; cursor: pointer;
             width: 100%; text-align: center; position: relative;
             box-shadow: var(--shadow-brutal); transition: all 0.1s;
             text-transform: uppercase;
@@ -80,156 +133,175 @@
         .btn-blue { background: var(--c-blue); color: white; }
         .btn-yellow { background: var(--c-yellow); color: var(--c-black); }
 
-        /* Grid Settings */
-        .settings-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+        /* SCROLL GRIDS */
+        .settings-grid, .design-grid, .color-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
             width: 100%; max-height: 50vh; overflow-y: auto;
             margin-bottom: 20px; padding-right: 10px;
         }
-        .settings-grid::-webkit-scrollbar { width: 10px; border-left: 2px solid var(--c-black); }
-        .settings-grid::-webkit-scrollbar-track { background: var(--c-white); }
-        .settings-grid::-webkit-scrollbar-thumb { background: var(--c-black); }
+        .settings-grid::-webkit-scrollbar, .design-grid::-webkit-scrollbar, .color-grid::-webkit-scrollbar { width: 10px; border-left: 2px solid var(--c-black); }
+        .settings-grid::-webkit-scrollbar-track, .design-grid::-webkit-scrollbar-track, .color-grid::-webkit-scrollbar-track { background: var(--c-white); }
+        .settings-grid::-webkit-scrollbar-thumb, .design-grid::-webkit-scrollbar-thumb, .color-grid::-webkit-scrollbar-thumb { background: var(--c-black); }
 
         .setting-item {
-            background: #eee; border: 2px solid var(--c-black); padding: 10px;
+            background: rgba(0,0,0,0.05); border: 2px solid var(--c-black); padding: 8px; border-radius: var(--ui-rad);
             display: flex; flex-direction: column; justify-content: center;
         }
-        .setting-item label { font-size: 12px; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; }
+        .setting-item label { font-size: 11px; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; font-family: var(--f-body); }
         .setting-item select, .setting-item input[type="number"] {
-            background: var(--c-white); border: 2px solid var(--c-black);
-            font-family: 'Space Mono', monospace; font-size: 14px; font-weight: bold;
+            background: var(--c-white); border: 2px solid var(--c-black); border-radius: var(--ui-rad);
+            font-family: var(--f-body); font-size: 14px; font-weight: bold;
             padding: 5px; cursor: pointer; color: var(--c-black);
         }
-        .setting-item input[type="range"] {
-            -webkit-appearance: none; width: 100%; background: transparent;
-        }
-        .setting-item input[type="range"]::-webkit-slider-runnable-track {
-            width: 100%; height: 10px; background: var(--c-black); border: 1px solid var(--c-black);
-        }
-        .setting-item input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none; height: 20px; width: 15px; background: var(--c-yellow);
-            border: 2px solid var(--c-black); margin-top: -6px; cursor: pointer;
-        }
+        .setting-item input[type="range"] { -webkit-appearance: none; width: 100%; background: transparent; }
+        .setting-item input[type="range"]::-webkit-slider-runnable-track { width: 100%; height: 8px; background: var(--c-black); border: 1px solid var(--c-black); border-radius: var(--ui-rad); }
+        .setting-item input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 18px; width: 14px; background: var(--c-yellow); border: 2px solid var(--c-black); margin-top: -6px; cursor: pointer; border-radius: var(--ui-rad); }
 
-        /* Field Selection */
+        /* PREVIEW CARDS (DESIGN & COLOR STUDIO) */
+        .preview-card {
+            background: var(--c-white); border: 2px solid var(--c-black); border-radius: var(--ui-rad);
+            padding: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px;
+            box-shadow: 4px 4px 0px var(--c-black); transition: 0.1s; color: var(--c-black); font-family: var(--f-body);
+        }
+        .preview-card:hover { transform: translateY(-2px); }
+        .preview-card.selected { background: var(--c-yellow); border-color: var(--c-black); outline: 2px solid var(--c-black); }
+        .preview-card h3 { font-family: var(--f-head); margin: 0; font-size: 16px; text-align: center; text-transform: uppercase; }
+        
+        .mini-preview { width: 100%; height: 35px; border: 2px solid var(--c-black); display: flex; align-items: center; justify-content: space-around; border-radius: inherit; background: var(--c-black); }
+        .mini-color-swatch { display: flex; width: 100%; height: 30px; border: 2px solid var(--c-black); border-radius: inherit; overflow: hidden; }
+        .swatch-c { flex: 1; height: 100%; }
+
         .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 20px; }
         .field-option {
-            background: var(--c-white); border: var(--border-thick); padding: 20px 10px;
-            cursor: pointer; text-align: center; font-family: 'Bebas Neue', sans-serif;
-            font-size: 22px; transition: 0.1s; box-shadow: 4px 4px 0px var(--c-black);
+            background: var(--c-white); border: var(--border-thick); padding: 15px 5px; border-radius: var(--ui-rad);
+            cursor: pointer; text-align: center; font-family: var(--f-head);
+            font-size: 20px; transition: 0.1s; box-shadow: 4px 4px 0px var(--c-black);
         }
         .field-option:active { box-shadow: 0px 0px 0px var(--c-black); transform: translate(4px, 4px); }
         .field-option.selected { background: var(--c-yellow); color: var(--c-black); }
 
-        /* GAME UI */
-        #game-container {
-            display: none; width: 100%; height: 100%; position: relative; background: var(--c-black);
+        /* LIVE PREVIEW WIDGET (SAĞ ÜST KÖŞE) */
+        #live-widget {
+            position: fixed; top: 15px; right: 15px; z-index: 100;
+            background: var(--c-white); border: var(--border-thick); border-radius: var(--ui-rad);
+            padding: 5px 10px; display: flex; flex-direction: column; align-items: center; gap: 5px;
+            box-shadow: 4px 4px 0px var(--c-yellow); font-family: var(--f-head); font-size: 14px; color: var(--c-black); pointer-events: none;
         }
+        #widget-shape { width: 20px; height: 20px; background: var(--c-red); border: 2px solid var(--c-black); }
+        #widget-color-bar { width: 100%; height: 6px; display: flex; }
+
+        /* GAME UI */
+        #game-container { display: none; width: 100%; height: 100%; position: relative; background: var(--c-black); }
         #canvas-wrapper { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
         canvas { width: 100%; height: 100%; display: block; image-rendering: pixelated; }
         
-        #hud {
-            position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-            display: flex; justify-content: space-between; align-items: center;
-            width: 95%; max-width: 600px; z-index: 20; pointer-events: none;
-        }
-        
-        .score-block {
-            background: var(--c-white); border: var(--border-thick);
-            padding: 5px 15px; display: flex; align-items: center; gap: 10px;
-            font-family: 'Bebas Neue', sans-serif; font-size: 30px; box-shadow: 4px 4px 0px var(--c-black);
-        }
-        .p1-score { color: var(--c-red); }
-        .p2-score { color: var(--c-blue); }
-        .score-block span {
-            background: var(--c-black); color: white; padding: 2px 12px; font-size: 35px;
-        }
+        #hud { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); display: flex; justify-content: space-between; align-items: center; width: 95%; max-width: 600px; z-index: 20; pointer-events: none; }
+        .score-block { background: var(--c-white); border: var(--border-thick); border-radius: var(--ui-rad); padding: 5px 15px; display: flex; align-items: center; gap: 10px; font-family: var(--f-head); font-size: 30px; box-shadow: 4px 4px 0px var(--c-black); }
+        .p1-score { color: var(--c-red); } .p2-score { color: var(--c-blue); }
+        .score-block span { background: var(--c-black); color: white; padding: 2px 12px; font-size: 35px; border-radius: var(--ui-rad); }
+        #timer-box { background: var(--c-yellow); border: var(--border-thick); border-radius: var(--ui-rad); color: var(--c-black); font-family: var(--f-body); font-size: 20px; font-weight: bold; padding: 8px 15px; box-shadow: 4px 4px 0px var(--c-black); }
+        .popup-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); background: var(--c-black); border: var(--border-thick); border-radius: var(--ui-rad); color: var(--c-yellow); font-family: var(--f-head); font-size: 80px; padding: 20px 40px; text-align: center; pointer-events: none; opacity: 0; z-index: 50; box-shadow: 15px 15px 0px var(--c-red); }
+        .popup-text.show { animation: stampAnim 1.2s cubic-bezier(0.2, 1.4, 0.4, 1) forwards; }
+        @keyframes stampAnim { 0% { transform: translate(-50%, -50%) scale(2); opacity: 0; } 30%, 70% { transform: translate(-50%, -50%) scale(1) rotate(-5deg); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0); opacity: 0; } }
 
-        #timer-box {
-            background: var(--c-yellow); border: var(--border-thick); color: var(--c-black);
-            font-family: 'Space Mono', monospace; font-size: 20px; font-weight: bold;
-            padding: 8px 15px; box-shadow: 4px 4px 0px var(--c-black);
-        }
-
-        .popup-text {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
-            background: var(--c-black); border: var(--border-thick); color: var(--c-yellow);
-            font-family: 'Bebas Neue', sans-serif; font-size: 80px; padding: 20px 40px;
-            text-align: center; pointer-events: none; opacity: 0; z-index: 50;
-            box-shadow: 15px 15px 0px var(--c-red);
-        }
-        .popup-text.show {
-            animation: stampAnim 1.2s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
-        }
-        @keyframes stampAnim {
-            0% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-            30% { transform: translate(-50%, -50%) scale(1) rotate(-5deg); opacity: 1; }
-            70% { transform: translate(-50%, -50%) scale(1) rotate(-5deg); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-        }
-
-        /* Mobile specific */
         @media (max-width: 600px) {
-            h1 { font-size: 50px; } h1 span { font-size: 22px; }
-            .brutal-box { padding: 30px 20px; width: 95%; }
-            .settings-grid { grid-template-columns: 1fr; max-height: 60vh; }
-            .score-block { font-size: 20px; padding: 5px 10px; }
-            .score-block span { font-size: 24px; padding: 2px 8px; }
+            h1 { font-size: 45px; } h1 span { font-size: 16px; }
+            .brutal-box { padding: 25px 15px; width: 95%; }
+            .settings-grid, .design-grid, .color-grid { grid-template-columns: 1fr; max-height: 55vh; }
+            .score-block { font-size: 20px; padding: 5px 10px; } .score-block span { font-size: 24px; padding: 2px 8px; }
             #timer-box { font-size: 16px; padding: 5px 10px; }
             .popup-text { font-size: 50px; padding: 10px 20px; box-shadow: 8px 8px 0px var(--c-red); }
+            #live-widget { display: none; } /* Mobilde gizle */
         }
     </style>
 </head>
-<body>
+<body data-color="raw" data-design="brutal">
+
+<div id="live-widget">
+    <div id="widget-shape" style="border-radius: var(--ui-rad)"></div>
+    <div id="widget-color-bar">
+        <div class="swatch-c" style="background: var(--c-red)"></div>
+        <div class="swatch-c" style="background: var(--c-blue)"></div>
+        <div class="swatch-c" style="background: var(--c-yellow)"></div>
+    </div>
+</div>
 
 <div class="bg-stripes" id="bg-anim"></div>
 
 <!-- MAIN MENU -->
 <div id="main-menu" class="screen">
     <div class="brutal-box">
-        <h1>MECHA STRIKE<br><span>// RAW EDITION</span></h1>
-        <button class="btn btn-red" onclick="startGame('1v1')">[ PLAY : 1 V 1 ]</button>
-        <button class="btn btn-blue" onclick="startGame('bot')">[ PLAY : VS C.P.U ]</button>
-        <button class="btn btn-yellow" onclick="showScreen('field-menu')">ENVIRONMENT</button>
-        <button class="btn" onclick="showScreen('settings-menu')">SYSTEM CONFIG</button>
+        <h1>MECHA STRIKE<br><span data-i18n="raw_edition">// RAW EDITION</span></h1>
+        <button class="btn btn-red" onclick="startGame('1v1')" data-i18n="play_1v1">[ PLAY : 1 V 1 ]</button>
+        <button class="btn btn-blue" onclick="startGame('bot')" data-i18n="play_cpu">[ PLAY : VS C.P.U ]</button>
+        <button class="btn btn-yellow" onclick="showScreen('field-menu')" data-i18n="btn_env">ENVIRONMENT</button>
+        <button class="btn" onclick="showScreen('design-menu')" data-i18n="btn_design">DESIGN & COLOR STUDIO</button>
+        <button class="btn" onclick="showScreen('settings-menu')" data-i18n="btn_sys">SYSTEM CONFIG</button>
     </div>
 </div>
 
-<!-- FIELD SELECTION -->
+<!-- DESIGN & COLOR STUDIO -->
+<div id="design-menu" class="screen hidden">
+    <div class="brutal-box" style="width: 700px;">
+        <div style="display:flex; width:100%; justify-content:space-between; align-items:center; margin-bottom:15px;">
+            <button class="btn" id="tab-design" onclick="switchTab('design')" style="margin:0; width:48%; background:var(--c-yellow);" data-i18n="tab_shapes">SHAPES</button>
+            <button class="btn" id="tab-color" onclick="switchTab('color')" style="margin:0; width:48%;" data-i18n="tab_colors">COLORS</button>
+        </div>
+        
+        <div class="design-grid" id="design-grid-container"></div>
+        <div class="color-grid" id="color-grid-container" style="display:none;"></div>
+        
+        <button class="btn btn-red" onclick="showScreen('main-menu')" data-i18n="btn_save">SAVE & EXIT</button>
+    </div>
+</div>
+
+<!-- ENVIRONMENT SELECTION -->
 <div id="field-menu" class="screen hidden">
     <div class="brutal-box" style="width: 600px;">
-        <h1 style="font-size: 40px; margin-bottom: 20px;">ENVIRONMENT MAP</h1>
+        <h1 style="font-size: 35px; margin-bottom: 20px;" data-i18n="title_env">ENVIRONMENT MAP</h1>
         <div class="field-grid">
             <div class="field-option selected" id="f-hazard" onclick="selectField('hazard')">HAZARD ZONE</div>
             <div class="field-option" id="f-blueprint" onclick="selectField('blueprint')">BLUEPRINT</div>
             <div class="field-option" id="f-terminal" onclick="selectField('terminal')">TERMINAL CRT</div>
             <div class="field-option" id="f-minimal" onclick="selectField('minimal')">STRICT MINIMAL</div>
         </div>
-        <button class="btn btn-red" onclick="showScreen('main-menu')">SAVE & EXIT</button>
+        <button class="btn btn-red" onclick="showScreen('main-menu')" data-i18n="btn_save">SAVE & EXIT</button>
     </div>
 </div>
 
 <!-- SETTINGS MENU -->
 <div id="settings-menu" class="screen hidden">
     <div class="brutal-box" style="max-width: 800px; width: 95%;">
-        <h1 style="font-size: 40px; margin-bottom: 20px;">SYSTEM CONFIGURATION</h1>
+        <h1 style="font-size: 35px; margin-bottom: 20px;" data-i18n="title_sys">SYSTEM CONFIGURATION</h1>
         <div class="settings-grid">
-            <div class="setting-item"><label>Win Score</label><input type="number" id="cfg-winscore" value="5" min="1"></div>
-            <div class="setting-item"><label>Time Limit</label><select id="cfg-timelimit"><option value="60">60 SEC</option><option value="120">120 SEC</option><option value="9999" selected>NO LIMIT</option></select></div>
-            <div class="setting-item"><label>Mecha Disk Size</label><input type="range" id="cfg-strikerrad" min="16" max="35" value="24"></div>
-            <div class="setting-item"><label>Core Ball Size</label><input type="range" id="cfg-ballradius" min="10" max="22" value="14"></div>
-            <div class="setting-item"><label>Max Kinetic Speed</label><input type="range" id="cfg-speed" min="15" max="45" value="30"></div>
-            <div class="setting-item"><label>Collision Bounciness</label><input type="range" id="cfg-elasticity" min="8" max="15" value="11"></div>
-            <div class="setting-item"><label>C.P.U Behavior</label><select id="cfg-botstyle"><option value="balanced" selected>BALANCED</option><option value="rush">AGGRESSIVE</option><option value="wall">DEFENSIVE</option></select></div>
-            <div class="setting-item"><label>Field Gravity</label><select id="cfg-gravity"><option value="0" selected>ZERO-G</option><option value="0.25">DOWN FORCE</option><option value="-0.25">UP FORCE</option></select></div>
-            <div class="setting-item"><label>Warp Portals</label><select id="cfg-portals"><option value="true" selected>ENABLED</option><option value="false">DISABLED</option></select></div>
-            <div class="setting-item"><label>Void Anomalies</label><select id="cfg-blackhole"><option value="true">ENABLED</option><option value="false" selected>DISABLED</option></select></div>
-            <div class="setting-item"><label>Moving Blocks</label><select id="cfg-obstacles"><option value="true" selected>ENABLED</option><option value="false">DISABLED</option></select></div>
-            <div class="setting-item"><label>Energy System (Stamina)</label><select id="cfg-stamina"><option value="true" selected>ACTIVE</option><option value="false">BYPASS</option></select></div>
-            <div class="setting-item"><label>Impact Slow-Mo</label><select id="cfg-slowmo"><option value="true" selected>ON</option><option value="false">OFF</option></select></div>
-            <div class="setting-item"><label>Screen Shake (VFX)</label><select id="cfg-shake"><option value="true" selected>MAX</option><option value="false">OFF</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_lang">Language</label>
+                <select id="cfg-lang" onchange="changeLang(this.value)">
+                    <option value="en">English</option><option value="tr">Türkçe</option>
+                    <option value="ja">日本語 (Japanese)</option><option value="ko">한국어 (Korean)</option>
+                    <option value="zh">中文 (Chinese)</option><option value="de">Deutsch (German)</option>
+                    <option value="fr">Français (French)</option><option value="es">Español (Spanish)</option>
+                    <option value="it">Italiano (Italian)</option><option value="pt">Português (Portuguese)</option>
+                    <option value="ru">Русский (Russian)</option><option value="ar">العربية (Arabic)</option>
+                    <option value="hi">हिन्दी (Hindi)</option><option value="nl">Nederlands (Dutch)</option>
+                    <option value="pl">Polski (Polish)</option><option value="sv">Svenska (Swedish)</option>
+                </select>
+            </div>
+            <div class="setting-item"><label data-i18n="lbl_win">Win Score</label><input type="number" id="cfg-winscore" value="5" min="1"></div>
+            <div class="setting-item"><label data-i18n="lbl_time">Time Limit</label><select id="cfg-timelimit"><option value="60">60 SEC</option><option value="120">120 SEC</option><option value="9999" selected>NO LIMIT</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_mecha">Mecha Disk Size</label><input type="range" id="cfg-strikerrad" min="16" max="35" value="24"></div>
+            <div class="setting-item"><label data-i18n="lbl_ball">Core Ball Size</label><input type="range" id="cfg-ballradius" min="10" max="22" value="14"></div>
+            <div class="setting-item"><label data-i18n="lbl_speed">Max Kinetic Speed</label><input type="range" id="cfg-speed" min="15" max="45" value="30"></div>
+            <div class="setting-item"><label data-i18n="lbl_bounce">Collision Bounciness</label><input type="range" id="cfg-elasticity" min="8" max="15" value="11"></div>
+            <div class="setting-item"><label data-i18n="lbl_bot">C.P.U Behavior</label><select id="cfg-botstyle"><option value="balanced" selected>BALANCED</option><option value="rush">AGGRESSIVE</option><option value="wall">DEFENSIVE</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_grav">Field Gravity</label><select id="cfg-gravity"><option value="0" selected>ZERO-G</option><option value="0.25">DOWN FORCE</option><option value="-0.25">UP FORCE</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_portals">Warp Portals</label><select id="cfg-portals"><option value="true" selected>ON</option><option value="false">OFF</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_void">Void Anomalies</label><select id="cfg-blackhole"><option value="true">ON</option><option value="false" selected>OFF</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_blocks">Moving Blocks</label><select id="cfg-obstacles"><option value="true" selected>ON</option><option value="false">OFF</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_stam">Energy System (Stamina)</label><select id="cfg-stamina"><option value="true" selected>ACTIVE</option><option value="false">BYPASS</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_slow">Impact Slow-Mo</label><select id="cfg-slowmo"><option value="true" selected>ON</option><option value="false">OFF</option></select></div>
+            <div class="setting-item"><label data-i18n="lbl_shake">Screen Shake (VFX)</label><select id="cfg-shake"><option value="true" selected>MAX</option><option value="false">OFF</option></select></div>
         </div>
-        <button class="btn btn-yellow" onclick="applySettings()">APPLY PROTOCOLS</button>
+        <button class="btn btn-yellow" onclick="applySettings()" data-i18n="btn_apply">APPLY PROTOCOLS</button>
     </div>
 </div>
 
@@ -237,8 +309,8 @@
 <div id="game-over-screen" class="screen hidden">
     <div class="brutal-box">
         <h1 id="winner-text" style="font-size: 55px; margin-bottom: 10px;">VICTORY</h1>
-        <p id="winner-sub" style="font-weight: bold; margin-bottom: 30px; background: var(--c-black); color: var(--c-yellow); padding: 5px 15px;">MATCH TERMINATED</p>
-        <button class="btn btn-red" onclick="showScreen('main-menu')">RETURN TO BASE</button>
+        <p id="winner-sub" style="font-weight: bold; margin-bottom: 30px; background: var(--c-black); color: var(--c-yellow); padding: 5px 15px; border-radius: var(--ui-rad);" data-i18n="txt_term">MATCH TERMINATED</p>
+        <button class="btn btn-red" onclick="showScreen('main-menu')" data-i18n="btn_base">RETURN TO BASE</button>
     </div>
 </div>
 
@@ -256,707 +328,310 @@
 </div>
 
 <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d', { alpha: false }); // Optimizasyon için alpha false (arkaplanı hep biz çizeceğiz)
-    
-    // Basit ve Sert Ses Motoru (Retro 8-bit tarzı)
-    let audioCtx = null;
-    function initAudio() { if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-    function playTone(freq, type, duration, vol=0.1) {
-        if (!audioCtx) return;
-        let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
-        osc.type = type; osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(vol, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-        osc.connect(gain); gain.connect(audioCtx.destination); osc.start(); osc.stop(audioCtx.currentTime + duration);
-    }
-
-    let cfg = { 
-        winScore: 5, timeLimit: 9999, gravity: 0, ballRadius: 14, elasticity: 1.1,
-        usePortals: true, useBlackhole: false, useStamina: true, botStyle: 'balanced',
-        maxSpeed: 30, strikerRad: 24, shake: true, useSlowMo: true, useObstacles: true
+    // --- DICTIONARY (16 DİL) ---
+    const i18n = {
+        en: { raw_edition:"// RAW EDITION", play_1v1:"[ PLAY : 1 V 1 ]", play_cpu:"[ PLAY : VS C.P.U ]", btn_env:"ENVIRONMENT", btn_design:"DESIGN & COLOR STUDIO", btn_sys:"SYSTEM CONFIG", tab_shapes:"SHAPES", tab_colors:"COLORS", btn_save:"SAVE & EXIT", title_env:"ENVIRONMENT MAP", title_sys:"SYSTEM CONFIGURATION", lbl_lang:"Language", lbl_win:"Win Score", lbl_time:"Time Limit", lbl_mecha:"Mecha Disk Size", lbl_ball:"Core Ball Size", lbl_speed:"Max Kinetic Speed", lbl_bounce:"Collision Bounciness", lbl_bot:"C.P.U Behavior", lbl_grav:"Field Gravity", lbl_portals:"Warp Portals", lbl_void:"Void Anomalies", lbl_blocks:"Moving Blocks", lbl_stam:"Energy System", lbl_slow:"Impact Slow-Mo", lbl_shake:"Screen Shake", btn_apply:"APPLY PROTOCOLS", txt_term:"MATCH TERMINATED", btn_base:"RETURN TO BASE" },
+        tr: { raw_edition:"// RAW SÜRÜM", play_1v1:"[ OYNA : 1 V 1 ]", play_cpu:"[ OYNA : BİLGİSAYAR ]", btn_env:"ÇEVRE HARİTASI", btn_design:"TASARIM & RENK STÜDYOSU", btn_sys:"SİSTEM AYARLARI", tab_shapes:"ŞEKİLLER", tab_colors:"RENKLER", btn_save:"KAYDET & ÇIK", title_env:"ARENA HARİTASI", title_sys:"SİSTEM KONFİGÜRASYONU", lbl_lang:"Dil / Language", lbl_win:"Kazanma Skoru", lbl_time:"Zaman Sınırı", lbl_mecha:"Oyuncu Boyutu", lbl_ball:"Top Boyutu", lbl_speed:"Maksimum Hız", lbl_bounce:"Çarpışma Sekmesi", lbl_bot:"Yapay Zeka Tarzı", lbl_grav:"Yerçekimi", lbl_portals:"Uzay Portalları", lbl_void:"Karadelikler", lbl_blocks:"Hareketli Engeller", lbl_stam:"Enerji Sistemi", lbl_slow:"Yavaş Çekim", lbl_shake:"Ekran Sarsıntısı", btn_apply:"PROTOKOLLERİ UYGULA", txt_term:"MAÇ SONLANDIRILDI", btn_base:"ANA ÜSSE DÖN" },
+        ja: { raw_edition:"// RAW エディション", play_1v1:"[ プレイ : 1 V 1 ]", play_cpu:"[ プレイ : VS CPU ]", btn_env:"環境マップ", btn_design:"デザイン＆カラースタジオ", btn_sys:"システム設定", tab_shapes:"形", tab_colors:"色", btn_save:"保存して終了", title_env:"環境マップ", title_sys:"システム設定", lbl_lang:"言語", lbl_win:"勝つスコア", lbl_time:"制限時間", lbl_mecha:"メカサイズ", lbl_ball:"ボールサイズ", lbl_speed:"最高速度", lbl_bounce:"弾み", lbl_bot:"CPUの動作", lbl_grav:"重力", lbl_portals:"ポータル", lbl_void:"ブラックホール", lbl_blocks:"動くブロック", lbl_stam:"スタミナ", lbl_slow:"スローモーション", lbl_shake:"画面の揺れ", btn_apply:"適用する", txt_term:"試合終了", btn_base:"ベースに戻る" },
+        ko: { raw_edition:"// RAW 에디션", play_1v1:"[ 플레이 : 1 V 1 ]", play_cpu:"[ 플레이 : VS CPU ]", btn_env:"환경 맵", btn_design:"디자인 및 색상 스튜디오", btn_sys:"시스템 설정", tab_shapes:"도형", tab_colors:"색상", btn_save:"저장 후 종료", title_env:"환경 맵", title_sys:"시스템 설정", lbl_lang:"언어", lbl_win:"승리 점수", lbl_time:"시간 제한", lbl_mecha:"메카 크기", lbl_ball:"공 크기", lbl_speed:"최대 속도", lbl_bounce:"탄력", lbl_bot:"CPU 행동", lbl_grav:"중력", lbl_portals:"포털", lbl_void:"블랙홀", lbl_blocks:"움직이는 블록", lbl_stam:"스태미나", lbl_slow:"슬로우 모션", lbl_shake:"화면 흔들림", btn_apply:"적용하기", txt_term:"경기 종료", btn_base:"기지로 돌아가기" },
+        zh: { raw_edition:"// RAW 版本", play_1v1:"[ 游玩 : 1 V 1 ]", play_cpu:"[ 游玩 : VS 电脑 ]", btn_env:"环境地图", btn_design:"设计与颜色工作室", btn_sys:"系统设置", tab_shapes:"形状", tab_colors:"颜色", btn_save:"保存并退出", title_env:"环境地图", title_sys:"系统配置", lbl_lang:"语言", lbl_win:"获胜分数", lbl_time:"时间限制", lbl_mecha:"机甲尺寸", lbl_ball:"球尺寸", lbl_speed:"最高速度", lbl_bounce:"弹力", lbl_bot:"CPU 行为", lbl_grav:"重力", lbl_portals:"传送门", lbl_void:"黑洞", lbl_blocks:"移动障碍", lbl_stam:"体力系统", lbl_slow:"慢动作", lbl_shake:"屏幕震动", btn_apply:"应用设置", txt_term:"比赛结束", btn_base:"返回基地" },
+        de: { raw_edition:"// RAW EDITION", play_1v1:"[ SPIELEN : 1 V 1 ]", play_cpu:"[ SPIELEN : VS CPU ]", btn_env:"UMGEBUNG", btn_design:"DESIGN & FARBSTUDIO", btn_sys:"SYSTEMEINSTELLUNGEN", tab_shapes:"FORMEN", tab_colors:"FARBEN", btn_save:"SPEICHERN & BEENDEN", title_env:"UMGEBUNGSKARTE", title_sys:"SYSTEMKONFIGURATION", lbl_lang:"Sprache", lbl_win:"Gewinnpunktzahl", lbl_time:"Zeitlimit", lbl_mecha:"Mecha-Größe", lbl_ball:"Ballgröße", lbl_speed:"Höchstgeschwindigkeit", lbl_bounce:"Sprungkraft", lbl_bot:"CPU-Verhalten", lbl_grav:"Schwerkraft", lbl_portals:"Portale", lbl_void:"Schwarze Löcher", lbl_blocks:"Bewegliche Blöcke", lbl_stam:"Ausdauer", lbl_slow:"Zeitlupe", lbl_shake:"Bildschirmwackeln", btn_apply:"ANWENDEN", txt_term:"SPIEL BEENDET", btn_base:"ZURÜCK ZUR BASIS" },
+        fr: { raw_edition:"// ÉDITION RAW", play_1v1:"[ JOUER : 1 V 1 ]", play_cpu:"[ JOUER : VS CPU ]", btn_env:"ENVIRONNEMENT", btn_design:"STUDIO DESIGN ET COULEUR", btn_sys:"CONFIG SYSTÈME", tab_shapes:"FORMES", tab_colors:"COULEURS", btn_save:"SAUVEGARDER & QUITTER", title_env:"CARTE ENVIRONNEMENT", title_sys:"CONFIGURATION SYSTÈME", lbl_lang:"Langue", lbl_win:"Score de Victoire", lbl_time:"Limite de Temps", lbl_mecha:"Taille du Mecha", lbl_ball:"Taille de la Balle", lbl_speed:"Vitesse Max", lbl_bounce:"Rebond", lbl_bot:"Comportement CPU", lbl_grav:"Gravité", lbl_portals:"Portails", lbl_void:"Trous Noirs", lbl_blocks:"Blocs Mobiles", lbl_stam:"Endurance", lbl_slow:"Ralenti", lbl_shake:"Tremblement", btn_apply:"APPLIQUER", txt_term:"MATCH TERMINÉ", btn_base:"RETOUR À LA BASE" },
+        es: { raw_edition:"// EDICIÓN RAW", play_1v1:"[ JUGAR : 1 V 1 ]", play_cpu:"[ JUGAR : VS CPU ]", btn_env:"ENTORNO", btn_design:"ESTUDIO DISEÑO Y COLOR", btn_sys:"CONFIGURACIÓN", tab_shapes:"FORMAS", tab_colors:"COLORES", btn_save:"GUARDAR Y SALIR", title_env:"MAPA DE ENTORNO", title_sys:"CONFIGURACIÓN DEL SISTEMA", lbl_lang:"Idioma", lbl_win:"Puntuación Victoria", lbl_time:"Límite Tiempo", lbl_mecha:"Tamaño Mecha", lbl_ball:"Tamaño Pelota", lbl_speed:"Velocidad Máx", lbl_bounce:"Rebote", lbl_bot:"Comportamiento CPU", lbl_grav:"Gravedad", lbl_portals:"Portales", lbl_void:"Agujeros Negros", lbl_blocks:"Bloques Móviles", lbl_stam:"Resistencia", lbl_slow:"Cámara Lenta", lbl_shake:"Temblor", btn_apply:"APLICAR", txt_term:"PARTIDO TERMINADO", btn_base:"VOLVER A LA BASE" },
+        it: { raw_edition:"// EDIZIONE RAW", play_1v1:"[ GIOCA : 1 V 1 ]", play_cpu:"[ GIOCA : VS CPU ]", btn_env:"AMBIENTE", btn_design:"STUDIO DESIGN E COLORE", btn_sys:"CONFIG DI SISTEMA", tab_shapes:"FORME", tab_colors:"COLORI", btn_save:"SALVA ED ESCI", title_env:"MAPPA AMBIENTE", title_sys:"CONFIGURAZIONE DI SISTEMA", lbl_lang:"Lingua", lbl_win:"Punteggio Vittoria", lbl_time:"Limite di Tempo", lbl_mecha:"Dimensione Mecha", lbl_ball:"Dimensione Palla", lbl_speed:"Velocità Max", lbl_bounce:"Rimbalzo", lbl_bot:"Comportamento CPU", lbl_grav:"Gravità", lbl_portals:"Portali", lbl_void:"Buchi Neri", lbl_blocks:"Blocchi Mobili", lbl_stam:"Resistenza", lbl_slow:"Rallentatore", lbl_shake:"Tremore", btn_apply:"APPLICA", txt_term:"PARTITA TERMINATA", btn_base:"TORNA ALLA BASE" },
+        pt: { raw_edition:"// EDIÇÃO RAW", play_1v1:"[ JOGAR : 1 V 1 ]", play_cpu:"[ JOGAR : VS CPU ]", btn_env:"AMBIENTE", btn_design:"ESTÚDIO DESIGN E COR", btn_sys:"CONFIGURAÇÃO", tab_shapes:"FORMAS", tab_colors:"CORES", btn_save:"SALVAR E SAIR", title_env:"MAPA DE AMBIENTE", title_sys:"CONFIGURAÇÃO DO SISTEMA", lbl_lang:"Idioma", lbl_win:"Pontuação Vitória", lbl_time:"Limite de Tempo", lbl_mecha:"Tamanho Mecha", lbl_ball:"Tamanho Bola", lbl_speed:"Velocidade Máx", lbl_bounce:"Salto", lbl_bot:"Comportamento CPU", lbl_grav:"Gravidade", lbl_portals:"Portais", lbl_void:"Buracos Negros", lbl_blocks:"Blocos Móveis", lbl_stam:"Vigor", lbl_slow:"Câmera Lenta", lbl_shake:"Tremor", btn_apply:"APLICAR", txt_term:"PARTIDA TERMINADA", btn_base:"VOLTAR À BASE" },
+        ru: { raw_edition:"// RAW ИЗДАНИЕ", play_1v1:"[ ИГРАТЬ : 1 V 1 ]", play_cpu:"[ ИГРАТЬ : VS CPU ]", btn_env:"ОКРУЖЕНИЕ", btn_design:"СТУДИЯ ДИЗАЙНА И ЦВЕТА", btn_sys:"СИСТЕМНЫЕ НАСТРОЙКИ", tab_shapes:"ФОРМЫ", tab_colors:"ЦВЕТА", btn_save:"СОХРАНИТЬ И ВЫЙТИ", title_env:"КАРТА ОКРУЖЕНИЯ", title_sys:"КОНФИГУРАЦИЯ СИСТЕМЫ", lbl_lang:"Язык", lbl_win:"Счет победы", lbl_time:"Лимит времени", lbl_mecha:"Размер Меха", lbl_ball:"Размер мяча", lbl_speed:"Макс. скорость", lbl_bounce:"Прыгучесть", lbl_bot:"Поведение CPU", lbl_grav:"Гравитация", lbl_portals:"Порталы", lbl_void:"Черные дыры", lbl_blocks:"Подвижные блоки", lbl_stam:"Выносливость", lbl_slow:"Замедление", lbl_shake:"Тряска экрана", btn_apply:"ПРИМЕНИТЬ", txt_term:"МАТЧ ЗАВЕРШЕН", btn_base:"ВЕРНУТЬСЯ НА БАЗУ" },
+        ar: { raw_edition:"// النسخة الخام", play_1v1:"[ العب : 1 ضد 1 ]", play_cpu:"[ العب : ضد الكمبيوتر ]", btn_env:"البيئة", btn_design:"استوديو التصميم والألوان", btn_sys:"تكوين النظام", tab_shapes:"الأشكال", tab_colors:"الألوان", btn_save:"حفظ وخروج", title_env:"خريطة البيئة", title_sys:"تكوين النظام", lbl_lang:"اللغة", lbl_win:"نقاط الفوز", lbl_time:"الحد الزمني", lbl_mecha:"حجم الميكا", lbl_ball:"حجم الكرة", lbl_speed:"السرعة القصوى", lbl_bounce:"الارتداد", lbl_bot:"سلوك الكمبيوتر", lbl_grav:"الجاذبية", lbl_portals:"البوابات", lbl_void:"الثقوب السوداء", lbl_blocks:"الكتل المتحركة", lbl_stam:"الطاقة", lbl_slow:"الحركة البطيئة", lbl_shake:"اهتزاز الشاشة", btn_apply:"تطبيق", txt_term:"انتهت المباراة", btn_base:"العودة إلى القاعدة" },
+        hi: { raw_edition:"// रॉ संस्करण", play_1v1:"[ खेलें : 1 V 1 ]", play_cpu:"[ खेलें : VS CPU ]", btn_env:"पर्यावरण", btn_design:"डिज़ाइन और रंग स्टूडियो", btn_sys:"सिस्टम सेटिंग्स", tab_shapes:"आकार", tab_colors:"रंग", btn_save:"सहेजें और बाहर निकलें", title_env:"पर्यावरण नक्शा", title_sys:"सिस्टम कॉन्फ़िगरेशन", lbl_lang:"भाषा", lbl_win:"जीत स्कोर", lbl_time:"समय सीमा", lbl_mecha:"मेचा आकार", lbl_ball:"गेंद आकार", lbl_speed:"अधिकतम गति", lbl_bounce:"उछाल", lbl_bot:"सीपीयू व्यवहार", lbl_grav:"गुरुत्वाकर्षण", lbl_portals:"पोर्टल", lbl_void:"ब्लैक होल", lbl_blocks:"चलती ब्लॉक", lbl_stam:"सहनशक्ति", lbl_slow:"धीमी गति", lbl_shake:"स्क्रीन शेक", btn_apply:"लागू करें", txt_term:"मैच समाप्त", btn_base:"आधार पर वापस जाएँ" },
+        nl: { raw_edition:"// RAW EDITIE", play_1v1:"[ SPELEN : 1 V 1 ]", play_cpu:"[ SPELEN : VS CPU ]", btn_env:"OMGEVING", btn_design:"ONTWERP & KLEUR STUDIO", btn_sys:"SYSTEEMCONFIGURATIE", tab_shapes:"VORMEN", tab_colors:"KLEUREN", btn_save:"OPSLAAN & AFSLUITEN", title_env:"OMGEVINGSKAART", title_sys:"SYSTEEMCONFIGURATIE", lbl_lang:"Taal", lbl_win:"Winnende Score", lbl_time:"Tijdslimiet", lbl_mecha:"Mecha Grootte", lbl_ball:"Bal Grootte", lbl_speed:"Max Snelheid", lbl_bounce:"Veerkracht", lbl_bot:"CPU Gedrag", lbl_grav:"Zwaartekracht", lbl_portals:"Portalen", lbl_void:"Zwarte Gaten", lbl_blocks:"Bewegende Blokken", lbl_stam:"Uithoudingsvermogen", lbl_slow:"Slow-Motion", lbl_shake:"Scherm Trillen", btn_apply:"TOEPASSEN", txt_term:"WEDSTRIJD BEËINDIGD", btn_base:"TERUG NAAR BASIS" },
+        pl: { raw_edition:"// EDYCJA RAW", play_1v1:"[ GRAJ : 1 V 1 ]", play_cpu:"[ GRAJ : VS CPU ]", btn_env:"ŚRODOWISKO", btn_design:"STUDIO PROJEKTU I KOLORU", btn_sys:"KONFIGURACJA SYSTEMU", tab_shapes:"KSZTAŁTY", tab_colors:"KOLORY", btn_save:"ZAPISZ I WYJDŹ", title_env:"MAPA ŚRODOWISKA", title_sys:"KONFIGURACJA SYSTEMU", lbl_lang:"Język", lbl_win:"Wynik Wygranej", lbl_time:"Limit Czasu", lbl_mecha:"Rozmiar Mecha", lbl_ball:"Rozmiar Piłki", lbl_speed:"Maks. Prędkość", lbl_bounce:"Odbicie", lbl_bot:"Zachowanie CPU", lbl_grav:"Grawitacja", lbl_portals:"Portale", lbl_void:"Czarne Dziury", lbl_blocks:"Ruchome Bloki", lbl_stam:"Wytrzymałość", lbl_slow:"Zwolnione Tempo", lbl_shake:"Wstrząs Ekranu", btn_apply:"ZASTOSUJ", txt_term:"MECZ ZAKOŃCZONY", btn_base:"POWRÓT DO BAZY" },
+        sv: { raw_edition:"// RAW-UTGÅVA", play_1v1:"[ SPELA : 1 V 1 ]", play_cpu:"[ SPELA : VS CPU ]", btn_env:"MILJÖ", btn_design:"DESIGN & FÄRGSTUDIO", btn_sys:"SYSTEMINSTÄLLNINGAR", tab_shapes:"FORMER", tab_colors:"FÄRGER", btn_save:"SPARA & AVSLUTA", title_env:"MILJÖKARTA", title_sys:"SYSTEMKONFIGURATION", lbl_lang:"Språk", lbl_win:"Vinstpoäng", lbl_time:"Tidsgräns", lbl_mecha:"Mecha-storlek", lbl_ball:"Bollstorlek", lbl_speed:"Maxhastighet", lbl_bounce:"Studs", lbl_bot:"CPU-beteende", lbl_grav:"Tyngdkraft", lbl_portals:"Portaler", lbl_void:"Svarta Hål", lbl_blocks:"Rörliga Block", lbl_stam:"Uthållighet", lbl_slow:"Slowmotion", lbl_shake:"Skakning", btn_apply:"TILLÄMPA", txt_term:"MATCH AVSLUTAD", btn_base:"TILLBAKA TILL BASEN" }
     };
 
-    let score1 = 0, score2 = 0, currentPlayer = 1, currentMode = '1v1', gameState = 'waiting', gameLoopId;
-    let frameCount = 0, matchTimer = 0, matchSeconds = 0, timeScale = 1;
-    let currentTheme = 'hazard';
-    let particles = [], trails = [], shakeTime = 0, wallCombo = 0;
+    function changeLang(lang) {
+        let l = i18n[lang] ? lang : 'en';
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            el.innerText = i18n[l][el.getAttribute('data-i18n')];
+        });
+        document.getElementById('cfg-lang').value = l;
+        localStorage.setItem('mecha-lang', l);
+    }
+
+    // --- TASARIM VE RENK VERİTABANI ---
+    const designs = [
+        { id: 'brutal', name: 'Brutalist', shape: 'square' },
+        { id: 'glass', name: 'Glassmorphism', shape: 'circle' },
+        { id: 'cyber', name: 'Cyberpunk', shape: 'hexagon' },
+        { id: 'pixel', name: 'Retro 8-Bit', shape: 'square' },
+        { id: 'arcade', name: 'Arcade 3D', shape: 'circle' },
+        { id: 'minimal', name: 'Strict Minimal', shape: 'circle' },
+        { id: 'tactical', name: 'Military Camo', shape: 'square' },
+        { id: 'luxury', name: 'Luxury Gold', shape: 'diamond' },
+        { id: 'chalk', name: 'Chalkboard', shape: 'circle' },
+        { id: 'vaporwave', name: 'Vaporwave', shape: 'square' },
+        { id: 'blood', name: 'Blood Moon', shape: 'triangle' },
+        { id: 'toxic', name: 'Toxic Hazard', shape: 'hexagon' },
+        { id: 'ocean', name: 'Deep Ocean', shape: 'circle' },
+        { id: 'comic', name: 'Comic Book', shape: 'square' },
+        { id: 'terminal', name: 'Matrix Terminal', shape: 'square' },
+        { id: 'industrial', name: 'Industrial Rust', shape: 'hexagon' },
+        { id: 'pill', name: 'Capsule Soft', shape: 'circle' },
+        { id: 'void', name: 'Neon Void', shape: 'circle' }
+    ];
+
+    const colors = [
+        { id: 'raw', name: 'RAW Default', c1: '#FF1010', c2: '#1030FF', c3: '#FFD600', bg: '#0A0A0A' },
+        { id: 'hacker', name: 'Hacker Terminal', c1: '#00FF41', c2: '#008F11', c3: '#00FF41', bg: '#051005' },
+        { id: 'synthwave', name: 'Synthwave', c1: '#FF007F', c2: '#00F0FF', c3: '#FFE600', bg: '#1A0B2E' },
+        { id: 'cyberpunk', name: 'Cyber City', c1: '#FF003C', c2: '#04D9FF', c3: '#F3E600', bg: '#111111' },
+        { id: 'monochrome', name: 'Monochrome', c1: '#FFFFFF', c2: '#AAAAAA', c3: '#CCCCCC', bg: '#050505' },
+        { id: 'vaporwave', name: 'Vaporwave', c1: '#FF71CE', c2: '#01CDFE', c3: '#05FFA1', bg: '#2C2C54' },
+        { id: 'bloodmoon', name: 'Blood Moon', c1: '#DC143C', c2: '#8B0000', c3: '#FF0000', bg: '#050000' },
+        { id: 'toxic', name: 'Toxic Zone', c1: '#FF4500', c2: '#32CD32', c3: '#ADFF2F', bg: '#0A0A0A' },
+        { id: 'oceanic', name: 'Deep Ocean', c1: '#00FFFF', c2: '#1E90FF', c3: '#00CED1', bg: '#000022' },
+        { id: 'royal', name: 'Royal Gold', c1: '#800020', c2: '#002366', c3: '#D4AF37', bg: '#0A0A0A' },
+        { id: 'pastel', name: 'Soft Pastel', c1: '#FFB3BA', c2: '#BAE1FF', c3: '#FFFFBA', bg: '#4A4A4A' },
+        { id: 'void', name: 'Neon Void', c1: '#FF00FF', c2: '#00FFFF', c3: '#00FF00', bg: '#000000' },
+        { id: 'sunset', name: 'Sunset Vibe', c1: '#FF4E50', c2: '#F9D423', c3: '#FF8E53', bg: '#2C0707' },
+        { id: 'forest', name: 'Forest Green', c1: '#A8E6CF', c2: '#3B82F6', c3: '#DCEDC1', bg: '#1E293B' },
+        { id: 'ice', name: 'Glacier Ice', c1: '#A0E8AF', c2: '#88CCF1', c3: '#C1DFF0', bg: '#00171F' },
+        { id: 'rust', name: 'Rusty Metal', c1: '#B33939', c2: '#227093', c3: '#CC8E35', bg: '#211E1E' },
+        { id: 'candy', name: 'Candy Pop', c1: '#FF1493', c2: '#00BFFF', c3: '#FFD700', bg: '#191970' },
+        { id: 'midnight', name: 'Midnight Run', c1: '#8A2BE2', c2: '#4169E1', c3: '#9370DB', bg: '#0B0B1A' },
+        { id: 'desert', name: 'Desert Sand', c1: '#E07A5F', c2: '#3D405B', c3: '#F2CC8F', bg: '#2E282A' },
+        { id: 'ghost', name: 'Ghost White', c1: '#E2E8F0', c2: '#94A3B8', c3: '#CBD5E1', bg: '#0F172A' }
+    ];
+
+    let activeDesign = 'brutal';
+    let activeShape = 'square';
+    let activeColor = 'raw';
+
+    function buildStudios() {
+        // Shapes
+        const dGrid = document.getElementById('design-grid-container');
+        dGrid.innerHTML = '';
+        designs.forEach(d => {
+            let card = document.createElement('div');
+            card.className = `preview-card ${activeDesign === d.id ? 'selected' : ''}`;
+            card.onclick = () => { activeDesign = d.id; activeShape = d.shape; applyStyles(); buildStudios(); };
+            card.innerHTML = `<h3>${d.name}</h3><div class="mini-preview" style="border-radius:var(--ui-rad);"><div style="width:15px;height:15px;background:var(--c-red);border-radius:${d.shape==='circle'?'50%':(d.shape==='triangle'||d.shape==='diamond'?'0':'2px')}"></div></div>`;
+            dGrid.appendChild(card);
+        });
+
+        // Colors
+        const cGrid = document.getElementById('color-grid-container');
+        cGrid.innerHTML = '';
+        colors.forEach(c => {
+            let card = document.createElement('div');
+            card.className = `preview-card ${activeColor === c.id ? 'selected' : ''}`;
+            card.onclick = () => { activeColor = c.id; applyStyles(); buildStudios(); };
+            card.innerHTML = `<h3>${c.name}</h3><div class="mini-color-swatch"><div class="swatch-c" style="background:${c.c1}"></div><div class="swatch-c" style="background:${c.c2}"></div><div class="swatch-c" style="background:${c.c3}"></div><div class="swatch-c" style="background:${c.bg}"></div></div>`;
+            cGrid.appendChild(card);
+        });
+    }
+
+    function switchTab(tab) {
+        document.getElementById('design-grid-container').style.display = tab === 'design' ? 'grid' : 'none';
+        document.getElementById('color-grid-container').style.display = tab === 'color' ? 'grid' : 'none';
+        document.getElementById('tab-design').style.background = tab === 'design' ? 'var(--c-yellow)' : 'var(--c-white)';
+        document.getElementById('tab-color').style.background = tab === 'color' ? 'var(--c-yellow)' : 'var(--c-white)';
+    }
+
+    function applyStyles() {
+        document.body.setAttribute('data-design', activeDesign);
+        document.body.setAttribute('data-color', activeColor);
+        localStorage.setItem('mecha-design', activeDesign);
+        localStorage.setItem('mecha-color', activeColor);
+    }
+
+    window.onload = () => {
+        let savedLang = localStorage.getItem('mecha-lang') || 'en'; changeLang(savedLang);
+        activeDesign = localStorage.getItem('mecha-design') || 'brutal';
+        activeColor = localStorage.getItem('mecha-color') || 'raw';
+        activeShape = designs.find(x => x.id === activeDesign)?.shape || 'square';
+        applyStyles(); buildStudios();
+    }
+
+    // --- KANVAS VE OYUN MOTORU (Hatasız) ---
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d', { alpha: false });
     
-    let balls = [], strikers = [], goalPosts = [], obstacles = [], portals = [], blackHoles = [], powerUps = [];
+    let audioCtx = null;
+    function initAudio() { if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    function playTone(f, t, d, v=0.1) { if(!audioCtx) return; let o=audioCtx.createOscillator(); let g=audioCtx.createGain(); o.type=t; o.frequency.setValueAtTime(f,audioCtx.currentTime); g.gain.setValueAtTime(v,audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+d); o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+d); }
+
+    let cfg = { winScore: 5, timeLimit: 9999, gravity: 0, ballRadius: 14, elasticity: 1.1, usePortals: true, useBlackhole: false, useStamina: true, botStyle: 'balanced', maxSpeed: 30, strikerRad: 24, shake: true, useSlowMo: true, useObstacles: true };
+    let score1=0, score2=0, currentPlayer=1, currentMode='1v1', gameState='waiting', gameLoopId, frameCount=0, matchTimer=0, matchSeconds=0, timeScale=1, currentTheme='hazard', shakeTime=0, wallCombo=0;
+    let balls=[], strikers=[], goalPosts=[], obstacles=[], portals=[], blackHoles=[], powerUps=[], particles=[], trails=[];
     let goalWidth, goalX;
-    let selectedStriker = null, dragStart = { x: 0, y: 0 }, dragCurrent = { x: 0, y: 0 };
+    let selectedStriker=null, dragStart={x:0,y:0}, dragCurrent={x:0,y:0};
 
-    function resizeCanvas() {
-        const wrapper = document.getElementById('canvas-wrapper');
-        canvas.width = wrapper.clientWidth;
-        canvas.height = wrapper.clientHeight;
-        setupEnvironment();
-    }
-    window.addEventListener('resize', () => { if(gameState !== 'gameover' && document.getElementById('game-container').style.display === 'block') resizeCanvas(); });
+    function resizeCanvas() { canvas.width=document.getElementById('canvas-wrapper').clientWidth; canvas.height=document.getElementById('canvas-wrapper').clientHeight; setupEnv(); }
+    window.addEventListener('resize', () => { if(gameState!=='gameover' && document.getElementById('game-container').style.display==='block') resizeCanvas(); });
 
-    function setupEnvironment() {
-        goalWidth = Math.max(160, canvas.width * 0.35);
-        if(goalWidth > 280) goalWidth = 280;
-        goalX = (canvas.width - goalWidth) / 2;
-
-        // Kare Kale Direkleri (Brutalist style)
-        goalPosts = [
-            {x: goalX, y: -5, r: 12, w: 24, h: 24, m: Infinity, isStatic: true, color: '#0A0A0A'}, 
-            {x: goalX + goalWidth, y: -5, r: 12, w: 24, h: 24, m: Infinity, isStatic: true, color: '#0A0A0A'},
-            {x: goalX, y: canvas.height+5, r: 12, w: 24, h: 24, m: Infinity, isStatic: true, color: '#0A0A0A'}, 
-            {x: goalX + goalWidth, y: canvas.height+5, r: 12, w: 24, h: 24, m: Infinity, isStatic: true, color: '#0A0A0A'}
-        ];
-
-        portals = cfg.usePortals ? [
-            {x: canvas.width * 0.15, y: canvas.height * 0.5, r: 28, targetIdx: 1, color: '#FF1010'},
-            {x: canvas.width * 0.85, y: canvas.height * 0.5, r: 28, targetIdx: 0, color: '#1030FF'}
-        ] : [];
-
-        blackHoles = cfg.useBlackhole ? [
-            {x: canvas.width * 0.5, y: canvas.height * 0.33, pull: 0.4, r: 35},
-            {x: canvas.width * 0.5, y: canvas.height * 0.67, pull: 0.4, r: 35}
-        ] : [];
-
-        obstacles = cfg.useObstacles ? [
-            { x: canvas.width * 0.25, y: canvas.height * 0.25, r: 22, m: Infinity, color: '#FFD600', isStatic: true, dir: 1, hp: 5 },
-            { x: canvas.width * 0.75, y: canvas.height * 0.75, r: 22, m: Infinity, color: '#FFD600', isStatic: true, dir: -1, hp: 5 }
-        ] : [];
+    function setupEnv() {
+        goalWidth = Math.max(160, canvas.width * 0.35); if(goalWidth>280) goalWidth=280; goalX = (canvas.width-goalWidth)/2;
+        goalPosts = [{x:goalX,y:-5,r:12,m:Infinity,isStatic:true}, {x:goalX+goalWidth,y:-5,r:12,m:Infinity,isStatic:true}, {x:goalX,y:canvas.height+5,r:12,m:Infinity,isStatic:true}, {x:goalX+goalWidth,y:canvas.height+5,r:12,m:Infinity,isStatic:true}];
+        portals = cfg.usePortals ? [{x:canvas.width*0.15, y:canvas.height*0.5, r:28, tid:1}, {x:canvas.width*0.85, y:canvas.height*0.5, r:28, tid:0}] : [];
+        blackHoles = cfg.useBlackhole ? [{x:canvas.width*0.5, y:canvas.height*0.33, r:35}, {x:canvas.width*0.5, y:canvas.height*0.67, r:35}] : [];
+        obstacles = cfg.useObstacles ? [{x:canvas.width*0.25, y:canvas.height*0.25, r:22, m:Infinity, isStatic:true, dir:1, hp:5}, {x:canvas.width*0.75, y:canvas.height*0.75, r:22, m:Infinity, isStatic:true, dir:-1, hp:5}] : [];
     }
 
-    // Kare Parçacıklar Sistemi (No Blur, No Fade - Hard pop out)
     class Spark {
-        constructor(x, y, color, speedScale=1) {
-            this.x = x; this.y = y; this.color = color;
-            let angle = Math.random() * Math.PI * 2; let speed = (Math.random() * 10 + 4) * speedScale;
-            this.vx = Math.cos(angle) * speed; this.vy = Math.sin(angle) * speed;
-            this.size = Math.random() * 8 + 4;
-            this.life = 1; this.decay = Math.random() * 0.05 + 0.02;
-            this.rot = Math.random() * Math.PI; this.rotSpeed = (Math.random() - 0.5) * 0.4;
-        }
-        update() { 
-            this.x += this.vx * timeScale; this.y += this.vy * timeScale; 
-            this.vx *= 0.90; this.vy *= 0.90; 
-            this.rot += this.rotSpeed;
-            this.life -= this.decay * timeScale; 
-        }
-        draw() {
-            if(this.life <= 0) return;
-            ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rot);
-            let s = this.size * this.life; // Büyüklük azalarak yok olur
-            ctx.fillStyle = this.color; ctx.fillRect(-s/2, -s/2, s, s);
-            ctx.lineWidth = 2; ctx.strokeStyle = '#0A0A0A'; ctx.strokeRect(-s/2, -s/2, s, s);
-            ctx.restore();
-        }
+        constructor(x,y,c,s=1) { this.x=x; this.y=y; this.c=c; let a=Math.random()*Math.PI*2; let sp=(Math.random()*10+4)*s; this.vx=Math.cos(a)*sp; this.vy=Math.sin(a)*sp; this.size=Math.random()*8+4; this.life=1; this.decay=Math.random()*0.05+0.02; this.rot=Math.random()*Math.PI; this.rs=(Math.random()-0.5)*0.4; }
+        update() { this.x+=this.vx*timeScale; this.y+=this.vy*timeScale; this.vx*=0.9; this.vy*=0.9; this.rot+=this.rs; this.life-=this.decay*timeScale; }
+        draw() { if(this.life<=0) return; ctx.save(); ctx.translate(this.x,this.y); ctx.rotate(this.rot); let s=this.size*this.life; ctx.fillStyle=this.c; ctx.fillRect(-s/2,-s/2,s,s); ctx.lineWidth=2; ctx.strokeStyle=getCSSVar('--c-black'); ctx.strokeRect(-s/2,-s/2,s,s); ctx.restore(); }
     }
+    function createSparks(x,y,c,s=1) { for(let i=0;i<15;i++) particles.push(new Spark(x,y,c,s)); }
 
-    function createSparks(x, y, color, scale=1) {
-        for(let i=0; i<15; i++) particles.push(new Spark(x, y, color, scale));
-    }
-
-    function showScreen(screenId) {
-        document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-        document.getElementById('game-container').style.display = 'none';
-        document.getElementById('bg-anim').style.display = screenId === 'game' ? 'none' : 'block';
-
-        if (screenId === 'game') {
-            document.getElementById('game-container').style.display = 'block';
-            resizeCanvas();
-        } else {
-            document.getElementById(screenId).classList.remove('hidden');
-        }
-    }
-
-    function selectField(id) {
-        currentTheme = id;
-        document.querySelectorAll('.field-option').forEach(el => el.classList.remove('selected'));
-        document.getElementById('f-'+id).classList.add('selected');
-    }
+    function showScreen(id) { document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden')); document.getElementById('game-container').style.display='none'; document.getElementById('bg-anim').style.display = id==='game'?'none':'block'; if(id==='game') { document.getElementById('game-container').style.display='block'; resizeCanvas(); } else document.getElementById(id).classList.remove('hidden'); }
+    function selectField(id) { currentTheme=id; document.querySelectorAll('.field-option').forEach(e=>e.classList.remove('selected')); document.getElementById('f-'+id).classList.add('selected'); }
 
     function applySettings() {
-        cfg.strikerRad = parseInt(document.getElementById('cfg-strikerrad').value);
-        cfg.winScore = parseInt(document.getElementById('cfg-winscore').value);
-        cfg.timeLimit = parseInt(document.getElementById('cfg-timelimit').value);
-        cfg.gravity = parseFloat(document.getElementById('cfg-gravity').value);
-        cfg.ballRadius = parseInt(document.getElementById('cfg-ballradius').value);
-        cfg.elasticity = parseInt(document.getElementById('cfg-elasticity').value) / 10;
-        cfg.usePortals = document.getElementById('cfg-portals').value === 'true';
-        cfg.useBlackhole = document.getElementById('cfg-blackhole').value === 'true';
-        cfg.useStamina = document.getElementById('cfg-stamina').value === 'true';
-        cfg.botStyle = document.getElementById('cfg-botstyle').value;
-        cfg.maxSpeed = parseInt(document.getElementById('cfg-speed').value);
-        cfg.shake = document.getElementById('cfg-shake').value === 'true';
-        cfg.useSlowMo = document.getElementById('cfg-slowmo').value === 'true';
-        cfg.useObstacles = document.getElementById('cfg-obstacles').value === 'true';
+        cfg.strikerRad=parseInt(document.getElementById('cfg-strikerrad').value); cfg.winScore=parseInt(document.getElementById('cfg-winscore').value);
+        cfg.timeLimit=parseInt(document.getElementById('cfg-timelimit').value); cfg.gravity=parseFloat(document.getElementById('cfg-gravity').value);
+        cfg.ballRadius=parseInt(document.getElementById('cfg-ballradius').value); cfg.elasticity=parseInt(document.getElementById('cfg-elasticity').value)/10;
+        cfg.usePortals=document.getElementById('cfg-portals').value==='true'; cfg.useBlackhole=document.getElementById('cfg-blackhole').value==='true';
+        cfg.useStamina=document.getElementById('cfg-stamina').value==='true'; cfg.botStyle=document.getElementById('cfg-botstyle').value;
+        cfg.maxSpeed=parseInt(document.getElementById('cfg-speed').value); cfg.shake=document.getElementById('cfg-shake').value==='true';
+        cfg.useSlowMo=document.getElementById('cfg-slowmo').value==='true'; cfg.useObstacles=document.getElementById('cfg-obstacles').value==='true';
         showScreen('main-menu');
     }
 
-    function startGame(mode) {
-        initAudio(); currentMode = mode; score1 = 0; score2 = 0; currentPlayer = 1;
-        matchSeconds = 0; matchTimer = 0; wallCombo = 0; timeScale = 1;
-        balls = []; powerUps = []; particles = []; trails = [];
-        
-        strikers = [
-            { id: 1, x: 0, y: 0, r: cfg.strikerRad, vx: 0, vy: 0, m: 14, color: '#FF1010', stamina: 100 },
-            { id: 2, x: 0, y: 0, r: cfg.strikerRad, vx: 0, vy: 0, m: 14, color: '#1030FF', stamina: 100 }
-        ];
-        
-        showScreen('game');
-        resetPositions();
-        updateUI();
-        if (gameLoopId) cancelAnimationFrame(gameLoopId);
-        gameLoop();
-    }
+    function startGame(mode) { initAudio(); currentMode=mode; score1=0; score2=0; currentPlayer=1; matchSeconds=0; matchTimer=0; wallCombo=0; timeScale=1; balls=[]; powerUps=[]; particles=[]; trails=[]; strikers=[{id:1,x:0,y:0,r:cfg.strikerRad,vx:0,vy:0,m:14,stamina:100,isP1:true},{id:2,x:0,y:0,r:cfg.strikerRad,vx:0,vy:0,m:14,stamina:100,isP1:false}]; showScreen('game'); resetPositions(); updateUI(); if(gameLoopId) cancelAnimationFrame(gameLoopId); gameLoop(); }
+    function triggerShake() { if(cfg.shake) shakeTime=10; }
 
-    function triggerShake() { if(cfg.shake) shakeTime = 10; }
-
-    function spawnPowerUp() {
-        if(powerUps.length >= 1) return; // Azaltılmış güçlendirme spam'i
-        const types = [{t: 'M', c: '#00FF00'}, {t: 'G', c: '#A200FF'}, {t: 'S', c: '#FF8800'}, {t: 'D', c: '#00E5FF'}];
-        let p = types[Math.floor(Math.random() * types.length)];
-        powerUps.push({
-            x: Math.random() * (canvas.width - 120) + 60,
-            y: Math.random() * (canvas.height - 300) + 150,
-            r: 18, type: p.t, color: p.c, rot: 0
-        });
-        createSparks(powerUps[0].x, powerUps[0].y, p.c, 1);
-    }
-
-    function botTurn() {
-        if (currentMode !== 'bot' || currentPlayer !== 2 || gameState !== 'waiting') return;
-        let targetBall = balls[0]; if(!targetBall) return;
-
-        let botS = strikers[1];
-        let reactionDelay = cfg.botStyle === 'rush' ? 150 : (cfg.botStyle === 'wall' ? 350 : 250);
-
-        setTimeout(() => {
-            if (gameState !== 'waiting') return;
-            let targetX = targetBall.x; let targetY = targetBall.y;
-            if (cfg.botStyle === 'wall') targetX += (Math.random() - 0.5) * 100; // Defansif sapma
-
-            let dx = targetX - botS.x; let dy = targetY - botS.y;
-            
-            dragStart = { x: botS.x, y: botS.y };
-            dragCurrent = { x: botS.x - dx * 0.8, y: botS.y - dy * 0.8 };
-            selectedStriker = botS; gameState = 'dragging';
-            
-            setTimeout(() => {
-                if(gameState === 'dragging') endInteraction({preventDefault:()=>{}});
-            }, 150);
-        }, reactionDelay);
-    }
+    function getCSSVar(name) { return getComputedStyle(document.body).getPropertyValue(name).trim(); }
 
     function update() {
         frameCount++;
+        if(gameState!=='gameover') { matchTimer++; if(matchTimer>=60) { matchTimer=0; matchSeconds++; let m=Math.floor(matchSeconds/60); let s=matchSeconds%60; document.getElementById('timer-box').innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s); if(matchSeconds>=cfg.timeLimit) handleTimeOut(); } }
+        obstacles.forEach(o=>{ o.x+=o.dir*2*timeScale; if(o.x-o.r<40 || o.x+o.r>canvas.width-40) o.dir*=-1; });
         
-        if(gameState !== 'gameover') {
-            matchTimer++;
-            if(matchTimer >= 60) {
-                matchTimer = 0; matchSeconds++;
-                let displaySec = matchSeconds % 60; let displayMin = Math.floor(matchSeconds / 60);
-                document.getElementById('timer-box').innerText = 
-                    (displayMin < 10 ? "0"+displayMin : displayMin) + ":" + (displaySec < 10 ? "0"+displaySec : displaySec);
-                
-                if(matchSeconds >= cfg.timeLimit) handleTimeOut();
-            }
-        }
+        let near = false;
+        if(cfg.useSlowMo) { balls.forEach(b=>{ if((b.y<90||b.y>canvas.height-90)&&b.x>goalX&&b.x<goalX+goalWidth) near=true; }); timeScale+=(near?-0.1:0.1); timeScale=Math.max(0.25,Math.min(1,timeScale)); } else timeScale=1;
 
-        obstacles.forEach(obs => {
-            obs.x += obs.dir * 2.2 * timeScale;
-            if(obs.x - obs.r < 40 || obs.x + obs.r > canvas.width - 40) obs.dir *= -1;
-        });
-
-        if(Math.random() < 0.002) spawnPowerUp();
-
-        // Slow-mo Trigger
-        let nearGoal = false;
-        if(cfg.useSlowMo) {
-            balls.forEach(b => {
-                if((b.y < 90 && b.x > goalX && b.x < goalX+goalWidth) || (b.y > canvas.height - 90 && b.x > goalX && b.x < goalX+goalWidth)) {
-                    nearGoal = true;
-                }
-            });
-            timeScale += (nearGoal ? -0.1 : 0.1); 
-            if(timeScale < 0.25) timeScale = 0.25; if(timeScale > 1) timeScale = 1;
-        } else { timeScale = 1; }
-
-        if (gameState === 'moving') {
-            let isMoving = false;
-            const substeps = 5; 
-            let entities = [...balls, ...strikers, ...goalPosts, ...obstacles];
-
-            for (let step = 0; step < substeps; step++) {
-                balls.forEach((ball) => {
-                    let speed = Math.hypot(ball.vx, ball.vy);
-
-                    // Blocky Trails
-                    if (step === 0 && speed > 4 && frameCount % 2 === 0) {
-                        trails.push({x: ball.x, y: ball.y, size: ball.r*1.2, color: ball.color});
-                        if (trails.length > 15) trails.shift();
-                    }
-
-                    ball.vy += cfg.gravity / substeps;
-
-                    blackHoles.forEach(bh => {
-                        let distBH = Math.hypot(bh.x - ball.x, bh.y - ball.y);
-                        if(distBH < 260 && distBH > 5) {
-                            let force = Math.pow((1 - distBH / 260), 2) * bh.pull;
-                            ball.vx += ((bh.x - ball.x) / distBH) * force / substeps;
-                            ball.vy += ((bh.y - ball.y) / distBH) * force / substeps;
-                        }
-                    });
-
-                    ball.x += ball.vx * timeScale / substeps;
-                    ball.y += ball.vy * timeScale / substeps;
-
-                    if (speed > cfg.maxSpeed) { ball.vx = (ball.vx/speed)*cfg.maxSpeed; ball.vy = (ball.vy/speed)*cfg.maxSpeed; }
-                    ball.vx *= Math.pow(0.99, timeScale/substeps); ball.vy *= Math.pow(0.99, timeScale/substeps);
-
-                    if (Math.abs(ball.vx) > 0.15 || Math.abs(ball.vy) > 0.15) isMoving = true;
-
-                    // Hard Wall Collisions
-                    if (ball.x - ball.r < 0) { ball.x = ball.r; ball.vx *= -0.9; wallCombo++; createSparks(0, ball.y, '#F4F4F0'); playTone(250, 'square', 0.05); }
-                    if (ball.x + ball.r > canvas.width) { ball.x = canvas.width - ball.r; ball.vx *= -0.9; wallCombo++; createSparks(canvas.width, ball.y, '#F4F4F0'); playTone(250, 'square', 0.05); }
-
-                    if (ball.y - ball.r < 0) {
-                        if (ball.x > goalX && ball.x < goalX + goalWidth) { handleGoal(1); return; }
-                        else { ball.y = ball.r; ball.vy *= -0.9; wallCombo++; createSparks(ball.x, 0, '#F4F4F0'); playTone(250, 'square', 0.05); }
-                    }
-                    if (ball.y + ball.r > canvas.height) {
-                        if (ball.x > goalX && ball.x < goalX + goalWidth) { handleGoal(2); return; }
-                        else { ball.y = canvas.height - ball.r; ball.vy *= -0.9; wallCombo++; createSparks(ball.x, canvas.height, '#F4F4F0'); playTone(250, 'square', 0.05); }
-                    }
-
-                    // Portal
-                    portals.forEach(p => {
-                        if(Math.hypot(ball.x - p.x, ball.y - p.y) < ball.r + p.r - 8) {
-                            let targetPortal = portals[p.targetIdx];
-                            ball.x = targetPortal.x + (ball.vx > 0 ? 35 : -35);
-                            ball.y = targetPortal.y + (ball.vy > 0 ? 35 : -35);
-                            ball.vx *= 1.1; ball.vy *= 1.1; 
-                            playTone(600, 'sawtooth', 0.1, 0.2); triggerShake();
-                            createSparks(p.x, p.y, '#F4F4F0', 2);
-                            createSparks(targetPortal.x, targetPortal.y, '#F4F4F0', 2);
-                        }
-                    });
-
-                    // PowerUp
-                    powerUps.forEach((pu, puIdx) => {
-                        if (Math.hypot(ball.x - pu.x, ball.y - pu.y) < ball.r + pu.r) {
-                            activatePowerUp(pu.type); createSparks(pu.x, pu.y, pu.color, 1.5);
-                            powerUps.splice(puIdx, 1);
-                        }
-                    });
+        if(gameState==='moving') {
+            let moving=false; let subs=5; let ents=[...balls,...strikers,...goalPosts,...obstacles];
+            for(let step=0;step<subs;step++) {
+                balls.forEach(b=>{
+                    let spd=Math.hypot(b.vx,b.vy); if(step===0&&spd>4&&frameCount%2===0) { trails.push({x:b.x,y:b.y,size:b.r*1.2}); if(trails.length>15) trails.shift(); }
+                    b.vy+=cfg.gravity/subs; b.x+=b.vx*timeScale/subs; b.y+=b.vy*timeScale/subs;
+                    if(spd>cfg.maxSpeed) { b.vx=(b.vx/spd)*cfg.maxSpeed; b.vy=(b.vy/spd)*cfg.maxSpeed; }
+                    b.vx*=Math.pow(0.99,timeScale/subs); b.vy*=Math.pow(0.99,timeScale/subs);
+                    if(Math.abs(b.vx)>0.1||Math.abs(b.vy)>0.1) moving=true;
+                    if(b.x-b.r<0){b.x=b.r;b.vx*=-0.9;wallCombo++;createSparks(0,b.y,getCSSVar('--c-white'));playTone(250,'square',0.05);}
+                    if(b.x+b.r>canvas.width){b.x=canvas.width-b.r;b.vx*=-0.9;wallCombo++;createSparks(canvas.width,b.y,getCSSVar('--c-white'));playTone(250,'square',0.05);}
+                    if(b.y-b.r<0){if(b.x>goalX&&b.x<goalX+goalWidth){handleGoal(1);return;}else{b.y=b.r;b.vy*=-0.9;wallCombo++;createSparks(b.x,0,getCSSVar('--c-white'));playTone(250,'square',0.05);}}
+                    if(b.y+b.r>canvas.height){if(b.x>goalX&&b.x<goalX+goalWidth){handleGoal(2);return;}else{b.y=canvas.height-b.r;b.vy*=-0.9;wallCombo++;createSparks(b.x,canvas.height,getCSSVar('--c-white'));playTone(250,'square',0.05);}}
                 });
-
-                strikers.forEach(s => {
-                    s.x += s.vx * timeScale / substeps; s.y += s.vy * timeScale / substeps;
-                    s.vx *= Math.pow(0.82, timeScale/substeps); s.vy *= Math.pow(0.82, timeScale/substeps);
-                    if (Math.abs(s.vx) > 0.1 || Math.abs(s.vy) > 0.1) isMoving = true;
-
-                    if (s.x - s.r < 0) { s.x = s.r; s.vx *= -0.5; }
-                    if (s.x + s.r > canvas.width) { s.x = canvas.width - s.r; s.vx *= -0.5; }
-                    if (s.y - s.r < 0) { s.y = s.r; s.vy *= -0.5; }
-                    if (s.y + s.r > canvas.height) { s.y = canvas.height - s.r; s.vy *= -0.5; }
-
-                    if(cfg.useStamina && s.stamina < 100) s.stamina += 0.12;
+                strikers.forEach(s=>{
+                    s.x+=s.vx*timeScale/subs; s.y+=s.vy*timeScale/subs; s.vx*=Math.pow(0.82,timeScale/subs); s.vy*=Math.pow(0.82,timeScale/subs);
+                    if(Math.abs(s.vx)>0.1||Math.abs(s.vy)>0.1) moving=true;
+                    if(s.x-s.r<0){s.x=s.r;s.vx*=-0.5;} if(s.x+s.r>canvas.width){s.x=canvas.width-s.r;s.vx*=-0.5;}
+                    if(s.y-s.r<0){s.y=s.r;s.vy*=-0.5;} if(s.y+s.r>canvas.height){s.y=canvas.height-s.r;s.vy*=-0.5;}
+                    if(cfg.useStamina&&s.stamina<100) s.stamina+=0.12;
                 });
-
-                for (let i=0; i<entities.length; i++) {
-                    for (let j=i+1; j<entities.length; j++) resolveCollision(entities[i], entities[j]);
-                }
+                for(let i=0;i<ents.length;i++) for(let j=i+1;j<ents.length;j++) resCol(ents[i],ents[j]);
             }
-
-            if (!isMoving && balls.every(b => Math.hypot(b.vx, b.vy) < 0.1)) {
-                gameState = 'waiting'; currentPlayer = currentPlayer === 1 ? 2 : 1;
-                wallCombo = 0; updateUI(); 
-                if (currentMode === 'bot' && currentPlayer === 2) botTurn();
-            }
+            if(!moving&&balls.every(b=>Math.hypot(b.vx,b.vy)<0.1)) { gameState='waiting'; currentPlayer=currentPlayer===1?2:1; wallCombo=0; updateUI(); if(currentMode==='bot'&&currentPlayer===2) botTurn(); }
         }
-        
-        particles.forEach((p, index) => { p.update(); if(p.life <= 0) particles.splice(index, 1); });
-        trails.forEach(t => t.size -= 0.8 * timeScale);
-        trails = trails.filter(t => t.size > 2);
+        particles.forEach((p,i)=>{p.update();if(p.life<=0)particles.splice(i,1);}); trails.forEach(t=>t.size-=0.8*timeScale); trails=trails.filter(t=>t.size>2);
     }
 
-    function activatePowerUp(type) {
-        playTone(700, 'square', 0.1, 0.2); playTone(900, 'square', 0.15, 0.2); triggerShake();
-        let currentStriker = strikers[currentPlayer - 1];
-
-        if(type === 'M') { // Multiball
-            balls.push({ x: canvas.width/2, y: canvas.height/2, r: cfg.ballRadius, vx: (Math.random()-0.5)*25, vy: (Math.random()-0.5)*25, m: 0.9, color: '#00FF00' });
-        } else if(type === 'S') { // Shrink
-            currentStriker.r = cfg.strikerRad * 0.55;
-            setTimeout(() => { currentStriker.r = cfg.strikerRad; createSparks(currentStriker.x, currentStriker.y, '#FF8800', 1.5); }, 7000);
-        } else if(type === 'G') { // Gravity/Magnet
-            balls.forEach(targetBall => {
-                targetBall.vx += (currentStriker.x - targetBall.x) * 0.45;
-                targetBall.vy += (currentStriker.y - targetBall.y) * 0.45;
-            });
-        } else if(type === 'D') { // Defense Wall
-            let shieldY = currentPlayer === 1 ? canvas.height - 30 : 30;
-            let shield = { x: canvas.width/2, y: shieldY, r: goalWidth/2.2, m: Infinity, color: '#00E5FF', isStatic: true, dir: 0, hp: 999, isShield: true };
-            obstacles.push(shield);
-            setTimeout(() => { obstacles = obstacles.filter(o => o !== shield); }, 8000);
+    function resCol(c1,c2) {
+        if(!c1||!c2) return; let dx=c2.x-c1.x; let dy=c2.y-c1.y; let dsq=dx*dx+dy*dy; let minD=c1.r+c2.r;
+        if(dsq<minD*minD&&dsq>0) {
+            let d=Math.sqrt(dsq); let nx=dx/d; let ny=dy/d; let over=minD-d;
+            let m1=c1.isStatic?0:1/c1.m; let m2=c2.isStatic?0:1/c2.m; let sm=m1+m2; if(sm===0) return; let cor=over/sm;
+            if(!c1.isStatic){c1.x-=nx*cor*m1;c1.y-=ny*cor*m1;} if(!c2.isStatic){c2.x+=nx*cor*m2;c2.y+=ny*cor*m2;}
+            let kx=(c2.vx||0)-(c1.vx||0); let ky=(c2.vy||0)-(c1.vy||0); let vn=kx*nx+ky*ny; if(vn>0) return;
+            let j=-(1+cfg.elasticity)*vn/sm; if(!c1.isStatic){c1.vx-=j*nx*m1;c1.vy-=j*ny*m1;} if(!c2.isStatic){c2.vx+=j*nx*m2;c2.vy+=j*ny*m2;}
+            if(balls.includes(c1)||balls.includes(c2)){ triggerShake(); playTone(200,'square',0.1,0.2); }
         }
     }
 
-    function resolveCollision(c1, c2) {
-        if (!c1 || !c2) return;
-        let dx = c2.x - c1.x; let dy = c2.y - c1.y;
-        let distSq = dx*dx + dy*dy; let minDist = c1.r + c2.r;
-
-        if (distSq < minDist*minDist && distSq > 0) {
-            let dist = Math.sqrt(distSq); let nx = dx / dist; let ny = dy / dist;
-            let overlap = minDist - dist;
-
-            let invM1 = c1.isStatic ? 0 : 1 / c1.m; let invM2 = c2.isStatic ? 0 : 1 / c2.m;
-            let sumInvM = invM1 + invM2; if (sumInvM === 0) return;
-
-            let correction = overlap / sumInvM;
-            if (!c1.isStatic) { c1.x -= nx * correction * invM1; c1.y -= ny * correction * invM1; }
-            if (!c2.isStatic) { c2.x += nx * correction * invM2; c2.y += ny * correction * invM2; }
-
-            let kx = (c2.vx || 0) - (c1.vx || 0); let ky = (c2.vy || 0) - (c1.vy || 0);
-            let velAlongNormal = kx * nx + ky * ny;
-            if (velAlongNormal > 0) return;
-
-            let restitution = cfg.elasticity;
-            let j = -(1 + restitution) * velAlongNormal; j /= sumInvM;
-            let impulseX = j * nx; let impulseY = j * ny;
-
-            if (!c1.isStatic) { c1.vx -= impulseX * invM1; c1.vy -= impulseY * invM1; }
-            if (!c2.isStatic) { c2.vx += impulseX * invM2; c2.vy += impulseY * invM2; }
-            
-            if (balls.includes(c1) || balls.includes(c2)) {
-                let hitBall = balls.includes(c1) ? c1 : c2;
-                let strikerHit = strikers.includes(c1) ? c1 : (strikers.includes(c2) ? c2 : null);
-                
-                if(strikerHit) {
-                    createSparks(hitBall.x, hitBall.y, strikerHit.color, 1.5);
-                    playTone(200, 'square', 0.1, 0.2); 
-                } else {
-                    createSparks(hitBall.x, hitBall.y, '#FFD600', 0.8);
-                    playTone(300, 'square', 0.08, 0.1);
-                }
-                triggerShake();
-
-                if(obstacles.includes(c1) && !c1.isShield) { c1.hp--; if(c1.hp<=0) { obstacles = obstacles.filter(o=>o!==c1); createSparks(c1.x, c1.y, c1.color, 3); playTone(100, 'sawtooth', 0.3, 0.4);} }
-                if(obstacles.includes(c2) && !c2.isShield) { c2.hp--; if(c2.hp<=0) { obstacles = obstacles.filter(o=>o!==c2); createSparks(c2.x, c2.y, c2.color, 3); playTone(100, 'sawtooth', 0.3, 0.4);} }
-            }
-        }
+    function drawShape(x, y, r, type, fill, stroke, lw) {
+        ctx.fillStyle = fill; ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.beginPath();
+        if(type==='square') ctx.rect(x-r, y-r, r*2, r*2);
+        else if(type==='hexagon') { for(let i=0;i<6;i++) { let a=Math.PI/3*i; ctx.lineTo(x+r*Math.cos(a), y+r*Math.sin(a)); } ctx.closePath(); }
+        else if(type==='triangle') { ctx.moveTo(x,y-r); ctx.lineTo(x+r,y+r); ctx.lineTo(x-r,y+r); ctx.closePath(); }
+        else if(type==='diamond') { ctx.moveTo(x,y-r*1.2); ctx.lineTo(x+r*1.2,y); ctx.lineTo(x,y+r*1.2); ctx.lineTo(x-r*1.2,y); ctx.closePath(); }
+        else ctx.arc(x,y,r,0,Math.PI*2);
+        ctx.fill(); if(lw>0) ctx.stroke();
     }
 
-    // BRUTALIST DRAW FUNCTION
     function draw() {
-        ctx.fillStyle = '#0A0A0A'; ctx.fillRect(0, 0, canvas.width, canvas.height); // Temizle
+        let cBg = getCSSVar('--c-black'); let cBox = getCSSVar('--c-white'); let cRed = getCSSVar('--c-red'); let cBlue = getCSSVar('--c-blue'); let cYel = getCSSVar('--c-yellow');
+        ctx.fillStyle = cBg; ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.save();
-        if (shakeTime > 0) { ctx.translate((Math.random() - 0.5) * 12, (Math.random() - 0.5) * 12); shakeTime--; }
+        ctx.save(); if(shakeTime>0) { ctx.translate((Math.random()-0.5)*12,(Math.random()-0.5)*12); shakeTime--; }
 
-        // --- ARKA PLAN (Sert & Net Temalar) ---
-        if (currentTheme === 'hazard') {
-            ctx.fillStyle = '#1A1A1A'; ctx.fillRect(0,0, canvas.width, canvas.height);
-            // Kenar şeritleri (Sarı / Siyah)
-            ctx.fillStyle = '#FFD600';
-            for(let i=-100; i<Math.max(canvas.width, canvas.height)+100; i+=40) {
-                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i+20, 0); ctx.lineTo(0, i+20); ctx.lineTo(0, i); ctx.fill();
-                ctx.beginPath(); ctx.moveTo(canvas.width, i); ctx.lineTo(canvas.width, i+20); ctx.lineTo(canvas.width-i-20, canvas.height); ctx.lineTo(canvas.width-i, canvas.height); ctx.fill();
-            }
-            ctx.fillStyle = '#0A0A0A'; ctx.fillRect(20, 20, canvas.width-40, canvas.height-40);
-        } 
-        else if (currentTheme === 'blueprint') {
-            ctx.fillStyle = '#002B7F'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = '#4DA6FF'; ctx.lineWidth = 1;
-            for(let x=20; x<canvas.width; x+=40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
-            for(let y=20; y<canvas.height; y+=40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
-            // Thick borders
-            ctx.strokeStyle = '#FFFFFF'; ctx.lineWidth = 4; ctx.strokeRect(10, 10, canvas.width-20, canvas.height-20);
-        } 
-        else if (currentTheme === 'terminal') {
-            ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = '#00FF00'; ctx.lineWidth = 2;
-            let scanline = (frameCount * 3) % canvas.height;
-            ctx.beginPath(); ctx.moveTo(0, scanline); ctx.lineTo(canvas.width, scanline); ctx.stroke();
-            // Data text noise
-            ctx.fillStyle = 'rgba(0, 255, 0, 0.2)'; ctx.font = '10px monospace';
-            if(frameCount % 10 === 0) ctx.fillText("SYS.RDY " + Math.random().toString(36).substring(7), Math.random()*canvas.width, Math.random()*canvas.height);
-        }
-        else if (currentTheme === 'minimal') {
-            ctx.fillStyle = '#F4F4F0'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.strokeStyle = '#0A0A0A'; ctx.lineWidth = 4;
-            ctx.strokeRect(20, 20, canvas.width-40, canvas.height-40);
+        if(currentTheme==='hazard') {
+            ctx.fillStyle = cYel;
+            for(let i=-100; i<Math.max(canvas.width,canvas.height)+100; i+=40) { ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i+20,0); ctx.lineTo(0,i+20); ctx.lineTo(0,i); ctx.fill(); ctx.beginPath(); ctx.moveTo(canvas.width,i); ctx.lineTo(canvas.width,i+20); ctx.lineTo(canvas.width-i-20,canvas.height); ctx.lineTo(canvas.width-i,canvas.height); ctx.fill(); }
+            ctx.fillStyle = cBg; ctx.fillRect(20,20,canvas.width-40,canvas.height-40);
+        } else if(currentTheme==='blueprint') {
+            ctx.fillStyle = '#002B7F'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.strokeStyle='#4DA6FF'; ctx.lineWidth=1;
+            for(let x=20;x<canvas.width;x+=40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+            for(let y=20;y<canvas.height;y+=40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
+            ctx.strokeStyle = cBox; ctx.lineWidth=4; ctx.strokeRect(10,10,canvas.width-20,canvas.height-20);
+        } else if(currentTheme==='terminal') {
+            ctx.fillStyle = '#000'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.strokeStyle='#0F0'; ctx.lineWidth=2;
+            let scan=(frameCount*3)%canvas.height; ctx.beginPath(); ctx.moveTo(0,scan); ctx.lineTo(canvas.width,scan); ctx.stroke();
+        } else if(currentTheme==='minimal') {
+            ctx.fillStyle = cBox; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.strokeStyle=cBg; ctx.lineWidth=4; ctx.strokeRect(20,20,canvas.width-40,canvas.height-40);
         }
 
-        let isDarkTheme = (currentTheme !== 'minimal');
-        let lineColor = isDarkTheme ? '#F4F4F0' : '#0A0A0A';
+        let lCol = currentTheme==='minimal' ? cBg : cBox;
+        ctx.strokeStyle = lCol; ctx.lineWidth = 4; ctx.setLineDash([15,15]); ctx.beginPath(); ctx.moveTo(0,canvas.height/2); ctx.lineTo(canvas.width,canvas.height/2); ctx.stroke();
+        ctx.setLineDash([]); ctx.beginPath(); ctx.arc(canvas.width/2,canvas.height/2,60,0,Math.PI*2); ctx.stroke();
+        ctx.strokeRect(goalX-20,0,goalWidth+40,60); ctx.strokeRect(goalX-20,canvas.height-60,goalWidth+40,60);
 
-        // Ortak Saha Çizgileri
-        ctx.strokeStyle = lineColor; ctx.lineWidth = 4;
-        ctx.setLineDash([15, 15]);
-        ctx.beginPath(); ctx.moveTo(0, canvas.height/2); ctx.lineTo(canvas.width, canvas.height/2); ctx.stroke();
-        ctx.setLineDash([]);
-        
-        ctx.beginPath(); ctx.arc(canvas.width/2, canvas.height/2, 60, 0, Math.PI * 2); ctx.stroke();
-        
-        // Kale Alanı Çizgileri
-        ctx.strokeRect(goalX - 20, 0, goalWidth + 40, 60);
-        ctx.strokeRect(goalX - 20, canvas.height - 60, goalWidth + 40, 60);
+        ctx.fillStyle = cBlue; ctx.fillRect(goalX,0,goalWidth,10); ctx.fillStyle = cRed; ctx.fillRect(goalX,canvas.height-10,goalWidth,10);
+        ctx.strokeStyle = cBg; ctx.lineWidth = 4; ctx.strokeRect(goalX,0,goalWidth,10); ctx.strokeRect(goalX,canvas.height-10,goalWidth,10);
 
-        // Kaleler
-        ctx.fillStyle = '#FF1010'; ctx.fillRect(goalX, canvas.height - 10, goalWidth, 10);
-        ctx.fillStyle = '#1030FF'; ctx.fillRect(goalX, 0, goalWidth, 10);
-        ctx.strokeStyle = '#0A0A0A'; ctx.lineWidth = 4;
-        ctx.strokeRect(goalX, canvas.height - 10, goalWidth, 10);
-        ctx.strokeRect(goalX, 0, goalWidth, 10);
-
-        // Portallar (Square warning blocks)
-        portals.forEach(p => {
-            ctx.save(); ctx.translate(p.x, p.y);
-            let s = p.r * 1.5;
-            ctx.fillStyle = p.color; ctx.fillRect(-s/2, -s/2, s, s);
-            ctx.lineWidth = 4; ctx.strokeStyle = '#0A0A0A'; ctx.strokeRect(-s/2, -s/2, s, s);
-            ctx.fillStyle = '#0A0A0A'; 
-            if(frameCount % 20 < 10) { ctx.fillRect(-s/4, -s/4, s/2, s/2); } // Yanıp sönme
-            ctx.restore();
-        });
-
-        // Karadelikler (Jagged polygons)
-        blackHoles.forEach(bh => {
-            ctx.save(); ctx.translate(bh.x, bh.y); ctx.rotate(frameCount*0.05);
-            ctx.fillStyle = '#0A0A0A'; ctx.strokeStyle = '#A200FF'; ctx.lineWidth = 4;
-            ctx.beginPath();
-            for(let i=0; i<8; i++) {
-                let r = bh.r + (i%2 === 0 ? 10 : -10);
-                let a = (i/8) * Math.PI * 2;
-                ctx.lineTo(Math.cos(a)*r, Math.sin(a)*r);
-            }
-            ctx.closePath(); ctx.fill(); ctx.stroke();
-            ctx.restore();
-        });
-
-        // Güçlendirmeler (Solid Square Block)
-        powerUps.forEach(pu => {
-            pu.rot += 0.05;
-            ctx.save(); ctx.translate(pu.x, pu.y); ctx.rotate(Math.sin(pu.rot)*0.3); // Hafif sallanma
-            let s = pu.r * 1.5;
-            // Brutalist shadow box
-            ctx.fillStyle = '#0A0A0A'; ctx.fillRect(-s/2 + 4, -s/2 + 4, s, s);
-            ctx.fillStyle = pu.color; ctx.fillRect(-s/2, -s/2, s, s);
-            ctx.strokeStyle = '#0A0A0A'; ctx.lineWidth = 3; ctx.strokeRect(-s/2, -s/2, s, s);
-            
-            ctx.fillStyle = '#0A0A0A'; ctx.font = 'bold 20px "Space Mono"'; ctx.textAlign = 'center'; ctx.textBaseline='middle'; 
-            ctx.fillText(pu.type, 0, 2);
-            ctx.restore();
-        });
-
-        // Engeller (Octagons veya Blocky Shapes)
-        obstacles.forEach(obs => {
-            ctx.save(); ctx.translate(obs.x, obs.y);
-            if(!obs.isShield) {
-                ctx.fillStyle = obs.color; ctx.strokeStyle = '#0A0A0A'; ctx.lineWidth = 4;
-                ctx.fillRect(-obs.r, -obs.r, obs.r*2, obs.r*2);
-                ctx.strokeRect(-obs.r, -obs.r, obs.r*2, obs.r*2);
-                ctx.fillStyle = '#0A0A0A'; ctx.font = 'bold 20px "Bebas Neue"'; ctx.textAlign = 'center'; ctx.textBaseline='middle'; 
-                ctx.fillText(obs.hp, 0, 2);
-            } else { // Kalkan
-                ctx.fillStyle = obs.color; ctx.fillRect(-obs.r, -10, obs.r*2, 20);
-                ctx.strokeStyle = '#0A0A0A'; ctx.lineWidth = 4; ctx.strokeRect(-obs.r, -10, obs.r*2, 20);
-                // Uyarı şeritleri üstüne çiz
-                ctx.fillStyle = '#0A0A0A';
-                for(let i=-obs.r; i<obs.r; i+=15) { ctx.fillRect(i, -10, 5, 20); }
-            }
-            ctx.restore();
-        });
-
-        // Kuyruk Efekti (Retro Squares)
-        trails.forEach(t => {
-            ctx.fillStyle = t.color; 
-            ctx.fillRect(t.x - t.size/2, t.y - t.size/2, t.size, t.size);
-            ctx.strokeStyle = '#0A0A0A'; ctx.lineWidth = 2;
-            ctx.strokeRect(t.x - t.size/2, t.y - t.size/2, t.size, t.size);
-        });
-
+        obstacles.forEach(o => drawShape(o.x, o.y, o.r, 'square', cYel, cBg, 4));
+        trails.forEach(t => drawShape(t.x, t.y, t.size/2, activeShape, cBox, cBg, 2));
         particles.forEach(p => p.draw());
 
-        // Top(lar) - Sharp, High Contrast
-        balls.forEach(ball => {
-            ctx.fillStyle = ball.color; 
-            ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI*2); ctx.fill();
-            ctx.lineWidth = 4; ctx.strokeStyle = '#0A0A0A'; ctx.stroke();
-            // Inner Cross
-            ctx.beginPath(); ctx.moveTo(ball.x - ball.r + 4, ball.y); ctx.lineTo(ball.x + ball.r - 4, ball.y); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(ball.x, ball.y - ball.r + 4); ctx.lineTo(ball.x, ball.y + ball.r - 4); ctx.stroke();
+        balls.forEach(b => drawShape(b.x, b.y, b.r, activeShape, cBox, cBg, 4));
+
+        strikers.forEach(s => {
+            let sc = s.isP1 ? cRed : cBlue;
+            if(s.id===currentPlayer && gameState==='waiting') { let ts=s.r+15; ctx.strokeStyle=sc; ctx.lineWidth=4; ctx.strokeRect(s.x-ts, s.y-ts, ts*2, ts*2); }
+            drawShape(s.x, s.y, s.r, activeShape, sc, cBg, 4);
+            if(cfg.useStamina) { ctx.fillStyle=cBg; ctx.fillRect(s.x+s.r+8,s.y-s.r,6,s.r*2); ctx.fillStyle=s.stamina>25?cYel:cRed; ctx.fillRect(s.x+s.r+9,s.y+s.r-(s.r*2*(s.stamina/100)),4,s.r*2*(s.stamina/100)); }
         });
 
-        // Oyuncular (Mecha Strikers)
-        strikers.forEach(obj => {
-            ctx.save();
-            
-            // Aktif oyuncu kare hedef (Targeting UI)
-            if (obj.id === currentPlayer && gameState === 'waiting') {
-                let ts = obj.r + 15;
-                ctx.strokeStyle = obj.color; ctx.lineWidth = 4;
-                // Köşe işaretleri
-                ctx.beginPath(); ctx.moveTo(obj.x-ts, obj.y-ts+10); ctx.lineTo(obj.x-ts, obj.y-ts); ctx.lineTo(obj.x-ts+10, obj.y-ts); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(obj.x+ts, obj.y-ts+10); ctx.lineTo(obj.x+ts, obj.y-ts); ctx.lineTo(obj.x+ts-10, obj.y-ts); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(obj.x-ts, obj.y+ts-10); ctx.lineTo(obj.x-ts, obj.y+ts); ctx.lineTo(obj.x-ts+10, obj.y+ts); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(obj.x+ts, obj.y+ts-10); ctx.lineTo(obj.x+ts, obj.y+ts); ctx.lineTo(obj.x+ts-10, obj.y+ts); ctx.stroke();
-            }
-
-            // Stamina Bar (Yan tarafa yerleştirilmiş düz blok)
-            if(cfg.useStamina) {
-                let barW = 6; let barH = obj.r * 2;
-                let sx = obj.x + obj.r + 8; let sy = obj.y - obj.r;
-                ctx.fillStyle = '#0A0A0A'; ctx.fillRect(sx, sy, barW, barH);
-                ctx.fillStyle = obj.stamina > 25 ? '#FFD600' : '#FF1010';
-                let fillH = barH * (obj.stamina/100);
-                ctx.fillRect(sx+1, sy + (barH - fillH) + 1, barW-2, fillH-2);
-            }
-
-            // Gölge Drop Shadow
-            ctx.fillStyle = '#0A0A0A'; ctx.beginPath(); ctx.arc(obj.x + 4, obj.y + 4, obj.r, 0, Math.PI*2); ctx.fill();
-
-            // Ana Gövde
-            ctx.fillStyle = obj.color; ctx.beginPath(); ctx.arc(obj.x, obj.y, obj.r, 0, Math.PI*2); ctx.fill();
-            ctx.lineWidth = 4; ctx.strokeStyle = '#0A0A0A'; ctx.stroke();
-            
-            // Üzerindeki Teknolojik Detaylar (Kareler, Çizgiler)
-            ctx.fillStyle = '#0A0A0A'; 
-            ctx.fillRect(obj.x - obj.r/2, obj.y - 3, obj.r, 6);
-            ctx.fillRect(obj.x - 3, obj.y - obj.r/2, 6, obj.r);
-            ctx.fillStyle = '#F4F4F0'; 
-            ctx.fillRect(obj.x - 4, obj.y - 4, 8, 8);
-            
-            ctx.restore();
-        });
-
-        // Nişan Hattı (Lazer Hedefleme YERİNE Teknik Kesikli Çizgi)
-        if (gameState === 'dragging' && selectedStriker) {
-            let dx = dragStart.x - dragCurrent.x; let dy = dragStart.y - dragCurrent.y;
-            let dist = Math.hypot(dx, dy); let maxP = 150; if (dist > maxP) { dx = (dx/dist)*maxP; dy = (dy/dist)*maxP; dist = maxP; }
-            
-            ctx.save();
-            ctx.strokeStyle = selectedStriker.color; ctx.lineWidth = 6;
-            ctx.setLineDash([10, 5]); 
-            ctx.lineDashOffset = -frameCount; // Hareket eden şerit
-            ctx.beginPath(); ctx.moveTo(selectedStriker.x, selectedStriker.y);
-            ctx.lineTo(selectedStriker.x + dx, selectedStriker.y + dy); ctx.stroke();
-            
-            // Uçtaki Hedef Çaprazı
-            ctx.setLineDash([]); ctx.lineWidth = 4; ctx.strokeStyle = '#0A0A0A';
-            let tx = selectedStriker.x + dx; let ty = selectedStriker.y + dy;
-            ctx.beginPath(); ctx.moveTo(tx - 10, ty - 10); ctx.lineTo(tx + 10, ty + 10); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(tx + 10, ty - 10); ctx.lineTo(tx - 10, ty + 10); ctx.stroke();
-            // Renk dolgulu
-            ctx.strokeStyle = '#FFD600'; ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.moveTo(tx - 10, ty - 10); ctx.lineTo(tx + 10, ty + 10); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(tx + 10, ty - 10); ctx.lineTo(tx - 10, ty + 10); ctx.stroke();
-
-            ctx.restore();
+        if(gameState==='dragging' && selectedStriker) {
+            let dx=dragStart.x-dragCurrent.x; let dy=dragStart.y-dragCurrent.y; let d=Math.hypot(dx,dy); if(d>150){dx=(dx/d)*150;dy=(dy/d)*150;}
+            ctx.strokeStyle = selectedStriker.isP1 ? cRed : cBlue; ctx.lineWidth=6; ctx.setLineDash([10,5]); ctx.lineDashOffset=-frameCount;
+            ctx.beginPath(); ctx.moveTo(selectedStriker.x,selectedStriker.y); ctx.lineTo(selectedStriker.x+dx,selectedStriker.y+dy); ctx.stroke(); ctx.setLineDash([]);
         }
-
         ctx.restore();
     }
 
-    function handleGoal(pId) {
-        if (pId === 1) score1++; else score2++;
-        playTone(300, 'sawtooth', 0.5, 0.4); playTone(200, 'square', 0.5, 0.4); triggerShake(); triggerShake();
-        
-        const popup = document.getElementById("popup");
-        if(wallCombo >= 3) { popup.innerText = `COMBO X${wallCombo}`; popup.style.color = 'var(--c-white)'; popup.style.background = 'var(--c-blue)'; }
-        else { popup.innerText = "IMPACT!"; popup.style.color = 'var(--c-yellow)'; popup.style.background = 'var(--c-black)'; }
-        
-        popup.classList.remove('show');
-        void popup.offsetWidth; 
-        popup.classList.add('show');
-        
-        gameState = 'waiting'; updateUI();
-        setTimeout(() => {
-            if (score1 >= cfg.winScore || score2 >= cfg.winScore) {
-                let winner = score1 >= cfg.winScore ? "P1 WINS" : (currentMode==='bot' ? "SYS C.P.U WINS" : "P2 WINS");
-                document.getElementById('winner-text').innerText = winner;
-                gameState = 'gameover'; showScreen('game-over-screen');
-            } else { resetPositions(); }
-        }, 1200);
+    function handleGoal(p) {
+        if(p===1) score1++; else score2++; triggerShake(); triggerShake(); playTone(300,'sawtooth',0.5,0.4);
+        let pop = document.getElementById("popup"); pop.innerText = "IMPACT!"; pop.classList.remove('show'); void pop.offsetWidth; pop.classList.add('show');
+        gameState='waiting'; updateUI(); setTimeout(() => { if(score1>=cfg.winScore||score2>=cfg.winScore) { document.getElementById('winner-text').innerText = score1>=cfg.winScore?"P1 WINS":"P2 WINS"; gameState='gameover'; showScreen('game-over-screen'); } else resetPositions(); }, 1200);
     }
+    
+    function handleTimeOut() { document.getElementById('winner-text').innerText = score1>score2?"P1 WINS":(score2>score1?"P2 WINS":"DRAW"); gameState='gameover'; showScreen('game-over-screen'); }
+    function resetPositions() { balls=[{x:canvas.width/2,y:canvas.height/2,r:cfg.ballRadius,vx:0,vy:0,m:1}]; strikers[0].x=canvas.width/2; strikers[0].y=canvas.height-120; strikers[0].vx=0; strikers[0].vy=0; strikers[1].x=canvas.width/2; strikers[1].y=120; strikers[1].vx=0; strikers[1].vy=0; gameState='waiting'; if(currentMode==='bot'&&currentPlayer===2) botTurn(); }
+    function updateUI() { document.getElementById('score1').innerText=score1; document.getElementById('score2').innerText=score2; }
 
-    function handleTimeOut() {
-        gameState = 'gameover';
-        let msg = "TIME OVER";
-        if(score1 === score2) {
-            msg = "SUDDEN DEATH!"; cfg.winScore = Math.max(score1, score2) + 1;
-            gameState = 'waiting'; resetPositions(); 
-            const popup = document.getElementById("popup");
-            popup.innerText = "SUDDEN DEATH"; popup.style.color = 'var(--c-red)';
-            popup.classList.remove('show'); void popup.offsetWidth; popup.classList.add('show');
-            return;
-        } else { msg = score1 > score2 ? "P1 WINS" : "P2 WINS"; }
-        document.getElementById('winner-text').innerText = msg;
-        showScreen('game-over-screen');
-    }
+    function botTurn() { if(currentMode!=='bot'||currentPlayer!==2||gameState!=='waiting') return; setTimeout(() => { if(gameState!=='waiting') return; let b=balls[0], s=strikers[1]; if(!b) return; let dx=b.x-s.x, dy=b.y-s.y; dragStart={x:s.x,y:s.y}; dragCurrent={x:s.x-dx*0.8, y:s.y-dy*0.8}; selectedStriker=s; gameState='dragging'; setTimeout(()=>endInt({preventDefault:()=>{}}), 150); }, 300); }
+    function getEPos(e) { let r=canvas.getBoundingClientRect(); return { x:((e.touches?e.touches[0].clientX:e.clientX)-r.left)*(canvas.width/r.width), y:((e.touches?e.touches[0].clientY:e.clientY)-r.top)*(canvas.height/r.height) }; }
+    function startInt(e) { if(gameState!=='waiting'||(currentMode==='bot'&&currentPlayer===2)) return; e.preventDefault(); let s=strikers.find(x=>x.id===currentPlayer); if(cfg.useStamina&&s.stamina<20) return; selectedStriker=s; dragStart=dragCurrent=getEPos(e); gameState='dragging'; }
+    function moveInt(e) { if(gameState==='dragging'&&selectedStriker) { e.preventDefault(); dragCurrent=getEPos(e); } }
+    function endInt(e) { if(gameState!=='dragging'||!selectedStriker) return; if(e&&e.preventDefault) e.preventDefault(); let dx=dragStart.x-dragCurrent.x, dy=dragStart.y-dragCurrent.y; let d=Math.hypot(dx,dy); if(d>150){dx=(dx/d)*150;dy=(dy/d)*150;} selectedStriker.vx=dx*1.15; selectedStriker.vy=dy*1.15; if(d>5) { if(cfg.useStamina) selectedStriker.stamina-=25; gameState='moving'; playTone(100,'square',0.1,0.3); } else gameState='waiting'; selectedStriker=null; }
 
-    function resetPositions() {
-        balls = [{ x: canvas.width/2, y: canvas.height/2, r: cfg.ballRadius, vx: 0, vy: 0, m: 1, color: '#F4F4F0' }];
-        strikers[0].x = canvas.width/2; strikers[0].y = canvas.height - 120; strikers[0].vx = 0; strikers[0].vy = 0;
-        strikers[1].x = canvas.width/2; strikers[1].y = 120; strikers[1].vx = 0; strikers[1].vy = 0;
-        trails = []; powerUps = []; particles = []; wallCombo = 0; gameState = 'waiting'; timeScale = 1;
-        if (currentMode === 'bot' && currentPlayer === 2) botTurn();
-    }
+    canvas.addEventListener('mousedown',startInt); canvas.addEventListener('mousemove',moveInt); window.addEventListener('mouseup',endInt);
+    canvas.addEventListener('touchstart',startInt,{passive:false}); canvas.addEventListener('touchmove',moveInt,{passive:false}); window.addEventListener('touchend',endInt);
 
-    function updateUI() {
-        document.getElementById('score1').innerText = score1; 
-        document.getElementById('score2').innerText = score2;
-    }
-
-    function getEventPos(e) {
-        let rect = canvas.getBoundingClientRect();
-        let clientX = e.touches ? e.touches[0].clientX : e.clientX; 
-        let clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        return { x: (clientX - rect.left) * (canvas.width / rect.width), y: (clientY - rect.top) * (canvas.height / rect.height) };
-    }
-
-    function startInteraction(e) {
-        if (gameState !== 'waiting' || (currentMode === 'bot' && currentPlayer === 2)) return;
-        e.preventDefault(); initAudio();
-        let pos = getEventPos(e);
-        let activeS = strikers.find(s => s.id === currentPlayer);
-        
-        if (Math.hypot(activeS.x - pos.x, activeS.y - pos.y) < activeS.r * 4) { // Daha geniş dokunma alanı
-            if(cfg.useStamina && activeS.stamina < 20) { playTone(150, 'sawtooth', 0.1, 0.1); return; } // Hata sesi
-            selectedStriker = activeS; dragStart = pos; dragCurrent = pos; gameState = 'dragging';
-        }
-    }
-
-    function moveInteraction(e) {
-        if (gameState !== 'dragging' || !selectedStriker) return;
-        e.preventDefault(); dragCurrent = getEventPos(e);
-    }
-
-    function endInteraction(e) {
-        if (gameState !== 'dragging' || !selectedStriker) return;
-        if(e && e.preventDefault) e.preventDefault();
-        
-        let dx = dragStart.x - dragCurrent.x; let dy = dragStart.y - dragCurrent.y;
-        let dist = Math.hypot(dx, dy); let maxP = 150; 
-        if (dist > maxP) { dx = (dx/dist)*maxP; dy = (dy/dist)*maxP; }
-        
-        selectedStriker.vx = dx * 1.15; selectedStriker.vy = dy * 1.15;
-        
-        if (Math.hypot(selectedStriker.vx, selectedStriker.vy) > 2) {
-            if(cfg.useStamina) selectedStriker.stamina -= 25; 
-            gameState = 'moving';
-            playTone(100, 'square', 0.1, 0.3); // Fırlatma Sesi
-        } else { gameState = 'waiting'; }
-        selectedStriker = null;
-    }
-
-    canvas.addEventListener('mousedown', startInteraction); canvas.addEventListener('mousemove', moveInteraction); window.addEventListener('mouseup', endInteraction);
-    canvas.addEventListener('touchstart', startInteraction, {passive: false}); canvas.addEventListener('touchmove', moveInteraction, {passive: false}); window.addEventListener('touchend', endInteraction);
-
-    function gameLoop() {
-        if(gameState !== 'gameover') { update(); draw(); }
-        gameLoopId = requestAnimationFrame(gameLoop);
-    }
+    function gameLoop() { if(gameState!=='gameover') { update(); draw(); } gameLoopId=requestAnimationFrame(gameLoop); }
 </script>
 </body>
 </html>
