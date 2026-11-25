@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="MECHA STRIKE">
+    <meta name="theme-color" content="#0A0A0A">
+    <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="">
+    <link id="app-favicon" rel="icon" type="image/png" href="">
+    <link id="app-manifest" rel="manifest" href="">
     <title>MECHA STRIKE // RAW EDITION</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;700;900&family=Orbitron:wght@500;700;900&family=Press+Start+2P&family=Cinzel:wght@700;900&family=VT323&family=Rajdhani:wght@600;700&family=Share+Tech+Mono&family=Black+Ops+One&display=swap');
@@ -214,6 +221,120 @@
             #live-widget { display: none; } /* Mobilde gizle */
         }
     </style>
+    <script>
+        (function initWordmarkHomeIcon() {
+            function renderMechaStrikeWordmarkIcon() {
+                const size = 512;
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                // Arka plan: Koyu brutalist zemin + çapraz şerit dokusu
+                ctx.fillStyle = '#0A0A0A';
+                ctx.fillRect(0, 0, size, size);
+
+                ctx.save();
+                ctx.fillStyle = '#151515';
+                for (let i = -size; i < size * 2; i += 48) {
+                    ctx.beginPath();
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i + 24, 0);
+                    ctx.lineTo(i - size + 24, size);
+                    ctx.lineTo(i - size, size);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                ctx.restore();
+
+                // Brutalist kutu (sarı sert gölge + kırık beyaz panel + kalın siyah çerçeve)
+                const boxX = 44;
+                const boxY = 66;
+                const boxW = 412;
+                const boxH = 368;
+
+                ctx.fillStyle = '#FFD600';
+                ctx.fillRect(boxX + 16, boxY + 16, boxW, boxH);
+
+                ctx.fillStyle = '#F4F4F0';
+                ctx.fillRect(boxX, boxY, boxW, boxH);
+
+                ctx.lineWidth = 10;
+                ctx.strokeStyle = '#0A0A0A';
+                ctx.strokeRect(boxX, boxY, boxW, boxH);
+
+                // Üst SYS.V.3.0 etiketi
+                ctx.fillStyle = '#FFD600';
+                ctx.fillRect(boxX + 24, boxY - 22, 146, 38);
+                ctx.lineWidth = 6;
+                ctx.strokeStyle = '#0A0A0A';
+                ctx.strokeRect(boxX + 24, boxY - 22, 146, 38);
+
+                ctx.fillStyle = '#0A0A0A';
+                ctx.font = 'bold 21px "Space Mono", monospace';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('SYS.V.3.0', boxX + 97, boxY - 2);
+
+                // Oyun İçi Başlık Tipografisi: MECHA STRIKE
+                const centerX = boxX + boxW / 2;
+                ctx.font = '900 116px "Bebas Neue", Impact, "Arial Black", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'alphabetic';
+
+                // Kırmızı sert gölge (h1 text-shadow: 4px 4px 0px var(--c-red))
+                ctx.fillStyle = '#FF1010';
+                ctx.fillText('MECHA', centerX + 7, boxY + 135);
+                ctx.fillText('STRIKE', centerX + 7, boxY + 238);
+
+                // Ana siyah harfler
+                ctx.fillStyle = '#0A0A0A';
+                ctx.fillText('MECHA', centerX, boxY + 128);
+                ctx.fillText('STRIKE', centerX, boxY + 231);
+
+                // Alt // RAW EDITION şeridi (h1 span)
+                const subX = boxX + 26;
+                const subY = boxY + 264;
+                const subW = boxW - 52;
+                const subH = 68;
+                ctx.fillStyle = '#0A0A0A';
+                ctx.fillRect(subX, subY, subW, subH);
+
+                ctx.fillStyle = '#FFD600';
+                ctx.font = '900 44px "Bebas Neue", Impact, "Arial Black", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('// RAW EDITION', centerX, subY + subH / 2 + 3);
+
+                const iconDataUrl = canvas.toDataURL('image/png');
+                const appleIcon = document.getElementById('apple-touch-icon');
+                const favicon = document.getElementById('app-favicon');
+                const manifestEl = document.getElementById('app-manifest');
+
+                if (appleIcon) appleIcon.href = iconDataUrl;
+                if (favicon) favicon.href = iconDataUrl;
+                if (manifestEl) {
+                    const manifest = {
+                        name: 'MECHA STRIKE',
+                        short_name: 'MECHA STRIKE',
+                        start_url: '.',
+                        display: 'standalone',
+                        background_color: '#0A0A0A',
+                        theme_color: '#0A0A0A',
+                        icons: [
+                            { src: iconDataUrl, sizes: '512x512', type: 'image/png' }
+                        ]
+                    };
+                    manifestEl.href = 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifest));
+                }
+            }
+
+            renderMechaStrikeWordmarkIcon();
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(renderMechaStrikeWordmarkIcon);
+            }
+        })();
+    </script>
 </head>
 <body data-color="raw" data-design="brutal">
 
